@@ -1,13 +1,23 @@
-// Select the cover wrapper
 const coverWrapper = document.querySelector('.cover-wrapper');
-
-// Listen for scroll events
 window.addEventListener('scroll', () => {
-    const scrollTop = window.scrollY; // Current vertical scroll position
-    const maxBorderWidth = 20; // Maximum border width
-    const borderWidth = Math.min(scrollTop, maxBorderWidth); // Calculate border width
+    const scrollTop = window.scrollY;
+    const maxBorderWidth = 20;
+    const borderWidth = Math.min(scrollTop, maxBorderWidth);
 
-    // Set the border width to the cover wrapper
     coverWrapper.style.borderWidth = `${borderWidth}px`;
-    coverWrapper.style.borderColor = '#F0F0E0'; // Set border color
+    coverWrapper.style.borderColor = '#F0F0E0';
+});
+
+document.addEventListener('DOMContentLoaded', function () {
+    setTimeout(loadRemainingImages, 1500);
+    function loadRemainingImages() {
+        const lazyImages = document.querySelectorAll('.lazy');
+        lazyImages.forEach(imageDiv => {
+            const imgElement = document.createElement('img');
+            imgElement.src = imageDiv.getAttribute('data-src');
+            imgElement.alt = imageDiv.getAttribute('data-alt');
+            imageDiv.prepend(imgElement);
+            imageDiv.classList.remove('lazy');
+        });
+    }
 });

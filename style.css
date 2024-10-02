@@ -124,27 +124,27 @@ body {
 }
 
 .gallery div {
-    position: relative; /* For absolute positioning of caption */
-    width: 100%; /* Full width of the grid cell */
-    height: 0; /* Start with no height */
-    padding-bottom: 100%; /* Creates a square by maintaining a 1:1 aspect ratio */
-    overflow: hidden; /* Prevents overflow */
+    position: relative;
+    width: 100%;
+    height: 0;
+    padding-bottom: 100%;
+    overflow: hidden;
 }
 
 .gallery img {
-    position: absolute; /* Position the image absolutely */
-    top: 0; /* Align to the top */
-    left: 0; /* Align to the left */
-    width: 100%; /* Full width of the container */
-    height: 100%; /* Full height of the container */
-    object-fit: cover; /* Ensures the image covers the square area */
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
 
 .gallery .caption {
     position: absolute;
-    top: 50%; /* Position at the vertical center */
-    left: 50%; /* Position at the horizontal center */
-    transform: translate(-50%, -50%); /* Center the caption */
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     width: 100%;
     margin: auto;
     text-align: center;
@@ -160,6 +160,14 @@ body {
 
 .gallery div:hover .caption {
     opacity: 1;
+}
+
+.lazy {
+    visibility: hidden;
+}
+
+.lazy img {
+    visibility: visible;
 }
 
 footer {
@@ -178,20 +186,20 @@ footer {
 .footer-center,
 .footer-right {
     flex: 1;
-    text-align: center; /* Center text in the middle */
+    text-align: center;
 }
 
-@media (max-width: 1000px) { /* Adjust the width as needed */
+@media (max-width: 1000px) {
     footer {
-        flex-direction: column; /* Stack items vertically */
-        align-items: flex-start; /* Align items to the start */
+        flex-direction: column;
+        align-items: flex-start;
     }
 
     .footer-left,
     .footer-center,
     .footer-right {
-        text-align: left; /* Align text to the left on mobile */
-        width: 100%; /* Full width for each item */
-        margin-bottom: 5px; /* Space between items */
+        text-align: left;
+        width: 100%;
+        margin-bottom: 5px;
     }
 }
