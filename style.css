@@ -1,4 +1,3 @@
-/* Import your custom font */
 @font-face {
     font-family: 'Netflix Sans';
     src: url('assets/NetflixSans-Regular.otf') format('truetype');
@@ -10,16 +9,28 @@ body {
     margin: 0;
     padding: 0;
     font-family: 'Netflix Sans', sans-serif;
-    background-color: #1B1020;
+    background-color: #F0F0E0;
     color: #fff;
     transition: background-color 0.5s, color 0.5s;
+    animation: fadeInAnimation ease 3s;
+    animation-iteration-count: 1;
+    animation-fill-mode: forwards;
 }
 
-/* Logo in top left corner with links */
+@keyframes fadeInAnimation {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
 .logo {
-    position: fixed;
+    position: absolute;
     top: 30px;
-    left: 30px;
+    left: 40px;
     z-index: 1000;
     text-align: left;
 }
@@ -29,19 +40,18 @@ body {
     height: auto;
 }
 
-/* Navigation links under the logo */
 .nav-links {
-    position: fixed;
+    position: absolute;
     top: 30px;
-    right: 30px;
+    right: 40px;
     z-index: 1000;
-    color: #fff;
+    color: #F0F0E0;
     text-align: right;
 }
 
 .nav-links a {
     display: block;
-    color: #fff;
+    color: #F0F0E0;
     text-decoration: none;
     font-size: 1rem;
     margin-top: 5px;
@@ -49,12 +59,120 @@ body {
 }
 
 .nav-links a:hover {
-    color: #ccc; /* Hover color change */
+    color: #ccc;
 }
 
+.cover-wrapper {
+    position: relative;
+    border: 0px solid #F0F0E0;
+    transition: border-width 0.5s ease;
+}
+
+.cover-image {
+    position: relative;
+}
 
 .cover-image img {
     width: 100%;
     height: 100vh;
-    object-fit: cover; /* Ensures the image covers the entire screen */
+    object-fit: cover;
+}
+
+.arrow {
+    position: absolute;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    animation: bob 1s ease-in-out infinite;
+}
+
+.arrow a {
+    font-size: 4rem;
+    color: #F0F0E0;
+    text-decoration: none;
+}
+
+@keyframes bob {
+    0% {
+        transform: translateX(-50%) translateY(0);
+    }
+    50% {
+        transform: translateX(-50%) translateY(-10px);
+    }
+    100% {
+        transform: translateX(-50%) translateY(0);
+    }
+}
+
+.description {
+    padding-left: 120px;
+    padding-right: 120px;
+    padding-top: 30px;
+    font-size: 1.2rem;
+    text-align: center;
+    color: #161E3F;
+}
+
+.gallery {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 60px;
+    padding-bottom: 60px;
+}
+
+.gallery div {
+    position: relative; /* For absolute positioning of caption */
+    width: 100%; /* Full width of the grid cell */
+    height: 0; /* Start with no height */
+    padding-bottom: 100%; /* Creates a square by maintaining a 1:1 aspect ratio */
+    overflow: hidden; /* Prevents overflow */
+}
+
+.gallery img {
+    position: absolute; /* Position the image absolutely */
+    top: 0; /* Align to the top */
+    left: 0; /* Align to the left */
+    width: 100%; /* Full width of the container */
+    height: 100%; /* Full height of the container */
+    object-fit: cover; /* Ensures the image covers the square area */
+}
+
+.gallery .caption {
+    position: absolute;
+    top: 50%; /* Position at the vertical center */
+    left: 50%; /* Position at the horizontal center */
+    transform: translate(-50%, -50%); /* Center the caption */
+    padding-top: 480px;
+    text-align: center;
+    font-size: 1.2rem;
+    background-color: rgba(0, 0, 0, 0.5);
+    color: #F0F0E0;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.gallery div:hover .caption {
+    opacity: 1;
+}
+
+footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 50px 20px;
+    background-color: #161E3F;
+    color: #F0F0E0;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+}
+
+.footer-left,
+.footer-center,
+.footer-right {
+    flex: 1;
+    text-align: center; /* Center text in the middle */
 }

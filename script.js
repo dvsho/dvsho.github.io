@@ -1,19 +1,13 @@
-const professionalRadio = document.getElementById('professional');
-const cookingRadio = document.getElementById('cooking');
-const body = document.body;
+// Select the cover wrapper
+const coverWrapper = document.querySelector('.cover-wrapper');
 
-function updateMode() {
-    if (professionalRadio.checked) {
-        body.classList.remove('dark-mode');
-        body.classList.add('light-mode');
-    } else {
-        body.classList.remove('light-mode');
-        body.classList.add('dark-mode');
-    }
-}
+// Listen for scroll events
+window.addEventListener('scroll', () => {
+    const scrollTop = window.scrollY; // Current vertical scroll position
+    const maxBorderWidth = 20; // Maximum border width
+    const borderWidth = Math.min(scrollTop, maxBorderWidth); // Calculate border width
 
-professionalRadio.addEventListener('change', updateMode);
-cookingRadio.addEventListener('change', updateMode);
-
-// Initial mode update
-updateMode();
+    // Set the border width to the cover wrapper
+    coverWrapper.style.borderWidth = `${borderWidth}px`;
+    coverWrapper.style.borderColor = '#F0F0E0'; // Set border color
+});
