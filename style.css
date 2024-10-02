@@ -162,6 +162,12 @@ body {
     animation: bob 1s ease-in-out infinite;
 }
 
+@media (max-width: 600px) {
+    .arrow {
+        bottom: 130px;
+    }
+}
+
 .arrow a {
     font-size: 4rem;
     color: #F0F0E0;
