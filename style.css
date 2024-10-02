@@ -51,15 +51,32 @@ body {
 
 .nav-links a {
     display: block;
+    position: relative;
     color: #F0F0E0;
     text-decoration: none;
     font-size: 1rem;
     margin-top: 5px;
-    transition: color 0.3s;
+    transition: color 0.3s ease;
 }
 
 .nav-links a:hover {
     color: #ccc;
+}
+
+.nav-links a.bob {
+    animation: bobRight 0.3s forwards;
+}
+
+@keyframes bobRight {
+    0% {
+        transform: translateX(0);
+    }
+    50% {
+        transform: translateX(10px);
+    }
+    100% {
+        transform: translateX(0);
+    }
 }
 
 .cover-wrapper {
@@ -116,11 +133,19 @@ body {
 .gallery {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 10px;
-    padding-left: 20px;
-    padding-right: 20px;
+    gap: 20px;
+    padding-left: 150px;
+    padding-right: 150px;
     padding-top: 60px;
     padding-bottom: 60px;
+}
+
+@media (max-width: 1000px) {
+    .gallery {
+        padding-left: 10px;
+        padding-right: 10px;
+        gap: 4px;
+    }
 }
 
 .gallery div {
@@ -162,11 +187,11 @@ body {
     opacity: 1;
 }
 
-.lazy {
+.image {
     visibility: hidden;
 }
 
-.lazy img {
+.image img {
     visibility: visible;
 }
 

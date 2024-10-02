@@ -11,13 +11,26 @@ window.addEventListener('scroll', () => {
 document.addEventListener('DOMContentLoaded', function () {
     setTimeout(loadRemainingImages, 1500);
     function loadRemainingImages() {
-        const lazyImages = document.querySelectorAll('.lazy');
-        lazyImages.forEach(imageDiv => {
+        const imageImages = document.querySelectorAll('.image');
+        imageImages.forEach(imageDiv => {
             const imgElement = document.createElement('img');
             imgElement.src = imageDiv.getAttribute('data-src');
             imgElement.alt = imageDiv.getAttribute('data-alt');
             imageDiv.prepend(imgElement);
-            imageDiv.classList.remove('lazy');
+            imageDiv.classList.remove('image');
         });
     }
+});
+
+document.querySelectorAll('.nav-links a').forEach(link => {
+    link.addEventListener('click', function (e) {
+        e.preventDefault();
+        const linkElement = this;
+        linkElement.classList.add('bob');
+        setTimeout(() => {
+            const targetUrl = linkElement.href;
+            window.location.href = targetUrl;
+            linkElement.classList.remove('bob');
+        }, 600);
+    });
 });
