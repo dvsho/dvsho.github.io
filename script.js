@@ -26,11 +26,26 @@ document.querySelectorAll('.nav-links a').forEach(link => {
     link.addEventListener('click', function (e) {
         e.preventDefault();
         const linkElement = this;
-        linkElement.classList.add('bob');
+
+        if (linkElement.textContent.includes('Email')) {
+            linkElement.classList.add('bob-up');
+        } else if (linkElement.textContent.includes('Resume')) {
+            linkElement.classList.add('bob-down');
+        } else {
+            linkElement.classList.add('bob-right');
+        }
+
+        linkElement.addEventListener('animationend', function() {
+            linkElement.classList.remove('bob-up', 'bob-down', 'bob-right');
+        });
+
         setTimeout(() => {
             const targetUrl = linkElement.href;
-            window.location.href = targetUrl;
-            linkElement.classList.remove('bob');
+            if (linkElement.textContent.includes('Email')) {
+                window.location.href = targetUrl;
+            } else {
+                window.open(targetUrl, '_blank');
+            }
         }, 600);
     });
 });

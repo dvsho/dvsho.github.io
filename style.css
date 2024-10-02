@@ -63,7 +63,7 @@ body {
     color: #ccc;
 }
 
-.nav-links a.bob {
+.nav-links a.bob-right {
     animation: bobRight 0.3s forwards;
 }
 
@@ -76,6 +76,38 @@ body {
     }
     100% {
         transform: translateX(0);
+    }
+}
+
+.nav-links a.bob-up {
+    animation: bobUp 0.3s forwards;
+}
+
+@keyframes bobUp {
+    0% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-5px);
+    }
+    100% {
+        transform: translateY(0);
+    }
+}
+
+.nav-links a.bob-down {
+    animation: bobDown 0.3s forwards;
+}
+
+@keyframes bobDown {
+    0% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(5px);
+    }
+    100% {
+        transform: translateY(0);
     }
 }
 
@@ -97,7 +129,7 @@ body {
 
 .arrow {
     position: absolute;
-    bottom: 30px;
+    bottom: 20px;
     left: 50%;
     transform: translateX(-50%);
     animation: bob 1s ease-in-out infinite;
