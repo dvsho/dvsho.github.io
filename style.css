@@ -29,20 +29,14 @@ body {
     height: auto;
 }
 
-.name {
-    position: fixed;
-    top: 60px;
-    right: 60px;
-    font-size: 1.7rem;
-    z-index: 1000;
-    text-align: right;
-    color: #fff;
-}
-
 /* Navigation links under the logo */
 .nav-links {
-    margin-top: 30px;
-    text-align: left;
+    position: fixed;
+    top: 40px;
+    right: 40px;
+    z-index: 1000;
+    color: #fff;
+    text-align: right;
 }
 
 .nav-links a {
