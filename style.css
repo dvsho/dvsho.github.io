@@ -145,9 +145,13 @@ body {
     top: 50%; /* Position at the vertical center */
     left: 50%; /* Position at the horizontal center */
     transform: translate(-50%, -50%); /* Center the caption */
-    padding-top: 480px;
+    width: 100%;
+    margin: auto;
     text-align: center;
     font-size: 1.2rem;
+    padding-top: 75%;
+    padding-left: 20px;
+    padding-right: 20px;
     background-color: rgba(0, 0, 0, 0.5);
     color: #F0F0E0;
     opacity: 0;
@@ -177,7 +181,7 @@ footer {
     text-align: center; /* Center text in the middle */
 }
 
-@media (max-width: 600px) { /* Adjust the width as needed */
+@media (max-width: 1000px) { /* Adjust the width as needed */
     footer {
         flex-direction: column; /* Stack items vertically */
         align-items: flex-start; /* Align items to the start */
