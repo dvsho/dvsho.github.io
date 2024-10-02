@@ -18,8 +18,8 @@ body {
 /* Logo in top left corner with links */
 .logo {
     position: fixed;
-    top: 40px;
-    left: 40px;
+    top: 30px;
+    left: 30px;
     z-index: 1000;
     text-align: left;
 }
@@ -32,8 +32,8 @@ body {
 /* Navigation links under the logo */
 .nav-links {
     position: fixed;
-    top: 40px;
-    right: 40px;
+    top: 30px;
+    right: 30px;
     z-index: 1000;
     color: #fff;
     text-align: right;
