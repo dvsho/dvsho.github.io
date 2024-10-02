@@ -22,11 +22,18 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 });
 
+const logo = document.querySelector('.logo');
+logo.addEventListener('click', function() {
+    logo.classList.add('spin');
+    logo.addEventListener('animationend', function() {
+        logo.classList.remove('spin');
+    });
+});
+
 document.querySelectorAll('.nav-links a').forEach(link => {
     link.addEventListener('click', function (e) {
         e.preventDefault();
         const linkElement = this;
-
         if (linkElement.textContent.includes('Email')) {
             linkElement.classList.add('bob-up');
         } else if (linkElement.textContent.includes('Resume')) {

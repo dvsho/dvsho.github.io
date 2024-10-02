@@ -33,11 +33,28 @@ body {
     left: 40px;
     z-index: 1000;
     text-align: left;
+    cursor: pointer;
 }
 
 .logo img {
     width: 80px;
     height: auto;
+}
+
+.logo.spin {
+    animation: spinScale 1s ease forwards;
+}
+
+@keyframes spinScale {
+    0% {
+        transform: rotate(0deg) scale(1);
+    }
+    50% {
+        transform: rotate(180deg) scale(1.1);
+    }
+    100% {
+        transform: rotate(360deg) scale(1);
+    }
 }
 
 .nav-links {
@@ -47,6 +64,16 @@ body {
     z-index: 1000;
     color: #F0F0E0;
     text-align: right;
+}
+
+@media (max-width: 600px) {
+    .logo {
+        left: 30px;
+    }
+
+    .nav-links {
+        right: 30px;
+    }
 }
 
 .nav-links a {
