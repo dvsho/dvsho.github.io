@@ -200,9 +200,17 @@ body {
     padding: 20px 120px;
 }
 
-@media (max-width: 1000px) {
+@media (max-width: 1200px) {
     .gallery {
         grid-template-columns: repeat(3, 1fr);
+        padding-left: 40px;
+        padding-right: 40px;
+    }
+}
+
+@media (max-width: 600px) {
+    .gallery {
+        grid-template-columns: repeat(2, 1fr);
         padding-left: 10px;
         padding-right: 10px;
         gap: 4px;
