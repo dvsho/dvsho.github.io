@@ -271,7 +271,7 @@ body {
 
 .popup img {
     width: 100%;
-    aspect-ratio: 1 / 1.2;
+    aspect-ratio: 1;
     object-fit: cover;
 }
 
@@ -283,6 +283,12 @@ body {
     height: 100px;
     box-sizing: border-box;
     font-size: 1.1rem;
+}
+
+@media (max-width: 600px) {
+    .popup .caption-section {
+        font-size: 0.9rem;
+    }
 }
 
 .popup .close-btn {
