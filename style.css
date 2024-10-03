@@ -287,6 +287,7 @@ body {
 
 @media (max-width: 600px) {
     .popup .caption-section {
+        padding: 25px;
         font-size: 0.9rem;
     }
 }
