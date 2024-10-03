@@ -20,6 +20,36 @@ document.addEventListener('DOMContentLoaded', function () {
             imageDiv.classList.remove('image');
         });
     }
+
+    const popup = document.createElement('div');
+    popup.classList.add('popup');
+    const overlay = document.createElement('div');
+    overlay.classList.add('overlay');
+    document.body.appendChild(popup);
+    document.body.appendChild(overlay);
+
+    document.querySelectorAll('.image').forEach(imageDiv => {
+        imageDiv.addEventListener('click', function () {
+            const imgSrc = imageDiv.getAttribute('data-src');
+            const captionText = imageDiv.querySelector('.caption').innerHTML;
+            popup.innerHTML = `
+                <img src="${imgSrc}" alt="Popup Image">
+                <div class="caption-section">${captionText}</div>
+                <span class="close-btn">×</span>
+            `;
+
+            popup.style.display = 'block';
+            overlay.style.display = 'block';
+            document.querySelector('.close-btn').addEventListener('click', closePopup);
+        });
+    });
+
+    function closePopup() {
+        popup.style.display = 'none';
+        overlay.style.display = 'none';
+    }
+
+    overlay.addEventListener('click', closePopup);
 });
 
 const logo = document.querySelector('.logo');
