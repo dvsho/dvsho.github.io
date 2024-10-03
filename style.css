@@ -301,6 +301,15 @@ body {
     cursor: pointer;
 }
 
+@media (max-width: 600px) {
+    .popup .close-btn {
+        top: 0px;
+        right: 10px;
+        font-size: 2rem;
+    }
+}
+
+
 .overlay {
     display: none;
     position: fixed;
