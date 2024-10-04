@@ -66,16 +66,6 @@ body {
     text-align: right;
 }
 
-@media (max-width: 600px) {
-    .logo {
-        left: 30px;
-    }
-
-    .nav-links {
-        right: 30px;
-    }
-}
-
 .nav-links a {
     display: block;
     position: relative;
@@ -84,6 +74,26 @@ body {
     font-size: 1rem;
     margin-top: 5px;
     transition: color 0.3s ease;
+}
+
+@media (max-width: 600px) {
+    .logo {
+        left: 30px;
+    }
+
+    .logo img {
+        width: 60px;
+        height: auto;
+    }
+
+    .nav-links {
+        top: 25px;
+        right: 30px;
+    }
+
+    .nav-links a {
+        font-size: 0.9rem;
+    }
 }
 
 .nav-links a:hover {
