@@ -207,7 +207,7 @@ body {
 .gallery {
     display: grid;
     grid-template-columns: repeat(5, 1fr);
-    gap: 16px;
+    gap: 12px;
     padding: 60px 120px;
 }
 
@@ -234,7 +234,7 @@ body {
     height: 0;
     padding-bottom: 100%;
     overflow: hidden;
-    border-radius: 15px;
+    border-radius: 12px;
     cursor: pointer;
     transition: transform 0.3s ease;
 }
