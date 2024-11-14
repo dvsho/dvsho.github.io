@@ -86,3 +86,32 @@ document.querySelectorAll('.nav-links a').forEach(link => {
         }, 600);
     });
 });
+
+document.querySelector('.back-to-top').addEventListener('click', function(e) {
+    e.preventDefault();
+    const button = this;
+    button.classList.add('bob-up');
+
+    button.addEventListener('animationend', function() {
+        button.classList.remove('bob-up');
+    });
+
+    setTimeout(() => {
+        const duration = 1000;
+        const start = window.scrollY;
+        const startTime = performance.now();
+
+        function scroll(currentTime) {
+            const elapsed = currentTime - startTime;
+            const progress = Math.min(elapsed / duration, 1);
+            const easeOut = 1 - Math.pow(1 - progress, 3);
+            
+            window.scrollTo(0, start * (1 - easeOut));
+            if (progress < 1) {
+                requestAnimationFrame(scroll);
+            }
+        }
+
+        requestAnimationFrame(scroll);
+    }, 600);
+});
