@@ -213,12 +213,19 @@ body {
 
 @media (max-width: 1200px) {
     .description {
-        padding-left: 40px;
-        padding-right: 40px;
+        padding-left: 60px;
+        padding-right: 60px;
     }
 
     .gallery {
         grid-template-columns: repeat(3, 1fr);
+        padding-left: 40px;
+        padding-right: 40px;
+    }
+}
+
+@media (max-width: 1000px) {
+    .description {
         padding-left: 40px;
         padding-right: 40px;
     }
