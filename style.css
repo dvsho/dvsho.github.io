@@ -5,6 +5,13 @@
     font-style: normal;
 }
 
+@font-face {
+    font-family: 'Ovo';
+    src: url('assets/Ovo-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
 body {
     margin: 0;
     padding: 0;
@@ -197,6 +204,7 @@ body {
 }
 
 .description {
+    font-family: 'Ovo', serif;
     padding: 60px 120px;
     padding-bottom: 10px;
     font-size: 1.2rem;
@@ -299,10 +307,11 @@ body {
 }
 
 .popup .caption-section {
+    font-family: 'Ovo', serif;
     background-color: #161E3F;
     color: #F0F0E0;
     text-align: center;
-    padding: 20px;
+    padding: 25px;
     height: 100px;
     box-sizing: border-box;
     font-size: 1.1rem;
@@ -310,7 +319,6 @@ body {
 
 @media (max-width: 600px) {
     .popup .caption-section {
-        padding: 25px;
         font-size: 0.9rem;
     }
 }
@@ -356,6 +364,7 @@ footer {
 }
 
 .footer-left {
+    font-family: 'Ovo', serif;
     flex: 1;
     text-align: left;
     padding: 0px 120px;
