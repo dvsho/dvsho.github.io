@@ -66,7 +66,7 @@ document.querySelectorAll('.nav-links a').forEach(link => {
         const linkElement = this;
         if (linkElement.textContent.includes('Email')) {
             linkElement.classList.add('bob-up');
-        } else if (linkElement.textContent.includes('Resume')) {
+        } else if (linkElement.textContent.includes('Common App')) {
             linkElement.classList.add('bob-down');
         } else {
             linkElement.classList.add('bob-right');

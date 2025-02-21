@@ -108,7 +108,7 @@ body {
 }
 
 .nav-links a.bob-right {
-    animation: bobRight 0.3s forwards;
+    animation: bobRight 0.4s forwards;
 }
 
 @keyframes bobRight {
@@ -124,7 +124,7 @@ body {
 }
 
 .nav-links a.bob-up {
-    animation: bobUp 0.3s forwards;
+    animation: bobUp 0.4s forwards;
 }
 
 @keyframes bobUp {
@@ -140,7 +140,7 @@ body {
 }
 
 .nav-links a.bob-down {
-    animation: bobDown 0.3s forwards;
+    animation: bobDown 0.4s forwards;
 }
 
 @keyframes bobDown {
@@ -420,7 +420,7 @@ footer {
 }
 
 .back-to-top.bob-up {
-    animation: buttonBobUp 0.3s forwards;
+    animation: buttonBobUp 0.4s forwards;
 }
 
 @keyframes buttonBobUp {
