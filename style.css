@@ -212,20 +212,47 @@ body {
     color: #161E3F;
 }
 
-.gallery {
+.year-header {
+    font-family: 'Ovo', serif;
+    padding: 0 120px;
+    margin-top: 40px;
+    margin-bottom: 20px;
+    font-size: 1.2rem;
+    color: #161E3F;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.year-header::before {
+    content: attr(data-year);
+    font-size: 2rem;
+    opacity: 0.8;
+}
+
+.year-header::after {
+    content: "";
+    flex-grow: 1;
+    height: 2px;
+    background-color: #161E3F;
+    margin-left: 10px;
+}
+
+.gallery20, .gallery21, .gallery22, .gallery23, .gallery24, .gallery25 {
     display: grid;
     grid-template-columns: repeat(5, 1fr);
     gap: 12px;
-    padding: 60px 120px;
+    padding: 0 120px;
+    margin-bottom: 80px;
 }
 
 @media (max-width: 1200px) {
-    .description {
+    .description, .year-header {
         padding-left: 60px;
         padding-right: 60px;
     }
 
-    .gallery {
+    .gallery20, .gallery21, .gallery22, .gallery23, .gallery24, .gallery25 {
         grid-template-columns: repeat(3, 1fr);
         padding-left: 40px;
         padding-right: 40px;
@@ -233,14 +260,14 @@ body {
 }
 
 @media (max-width: 1000px) {
-    .description {
+    .description, .year-header {
         padding-left: 40px;
         padding-right: 40px;
     }
 }
 
 @media (max-width: 600px) {
-    .gallery {
+    .gallery20, .gallery21, .gallery22, .gallery23, .gallery24, .gallery25 {
         grid-template-columns: repeat(2, 1fr);
         padding-left: 10px;
         padding-right: 10px;
@@ -248,7 +275,7 @@ body {
     }
 }
 
-.gallery div {
+.gallery20 div, .gallery21 div, .gallery22 div, .gallery23 div, .gallery24 div, .gallery25 div {
     position: relative;
     width: 100%;
     height: 0;
@@ -256,24 +283,24 @@ body {
     overflow: hidden;
     border-radius: 12px;
     cursor: pointer;
+}
+
+.gallery20 div:hover, .gallery21 div:hover, .gallery22 div:hover, .gallery23 div:hover, .gallery24 div:hover, .gallery25 div:hover {
+    transform: scale(1.03);
     transition: transform 0.3s ease;
 }
 
-.gallery div:hover {
-    transform: scale(1.03);
-}
-
 @media (max-width: 600px) {
-    .gallery div {
+    .gallery20 div, .gallery21 div, .gallery22 div, .gallery23 div, .gallery24 div, .gallery25 div {
         border-radius: 0px;
     }
 
-    .gallery div:hover {
+    .gallery20 div:hover, .gallery21 div:hover, .gallery22 div:hover, .gallery23 div:hover, .gallery24 div:hover, .gallery25 div:hover {
         transform: scale(1);
     }
 }
 
-.gallery img {
+.gallery20 img, .gallery21 img, .gallery22 img, .gallery23 img, .gallery24 img, .gallery25 img {
     position: absolute;
     top: 0;
     left: 0;
@@ -282,7 +309,7 @@ body {
     object-fit: cover;
 }
 
-.gallery .caption {
+.gallery20 .caption, .gallery21 .caption, .gallery22 .caption, .gallery23 .caption, .gallery24 .caption, .gallery25 .caption {
     opacity: 0;
 }
 
