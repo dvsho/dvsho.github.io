@@ -289,21 +289,13 @@ body {
     overflow: hidden;
     border-radius: 12px;
     cursor: pointer;
+    border: 2px solid #161E3F;
+    background-color: transparent;
+    transition: border-color 0.3s ease-in-out;
 }
 
-.gallery20 div:hover, .gallery21 div:hover, .gallery22 div:hover, .gallery23 div:hover, .gallery24 div:hover, .gallery25 div:hover {
-    transform: scale(1.03);
-    transition: transform 0.3s ease;
-}
-
-@media (max-width: 600px) {
-    .gallery20 div, .gallery21 div, .gallery22 div, .gallery23 div, .gallery24 div, .gallery25 div {
-        border-radius: 0px;
-    }
-
-    .gallery20 div:hover, .gallery21 div:hover, .gallery22 div:hover, .gallery23 div:hover, .gallery24 div:hover, .gallery25 div:hover {
-        transform: scale(1);
-    }
+.gallery20 div.loaded, .gallery21 div.loaded, .gallery22 div.loaded, .gallery23 div.loaded, .gallery24 div.loaded, .gallery25 div.loaded {
+    border-color: transparent;
 }
 
 .gallery20 img, .gallery21 img, .gallery22 img, .gallery23 img, .gallery24 img, .gallery25 img {
@@ -315,6 +307,7 @@ body {
     object-fit: cover;
     opacity: 0;
     transition: opacity 0.3s ease-in-out;
+    z-index: 2;
 }
 
 .gallery20 img.loaded, .gallery21 img.loaded, .gallery22 img.loaded, .gallery23 img.loaded, .gallery24 img.loaded, .gallery25 img.loaded {

@@ -29,6 +29,8 @@ document.addEventListener('DOMContentLoaded', function () {
                 imgElement.style.transition = 'opacity 0.3s ease-in-out';
                 imgElement.onload = () => {
                     imgElement.style.opacity = '1';
+                    imgElement.classList.add('loaded');
+                    imageDiv.classList.add('loaded');
                 };
                 imageDiv.prepend(imgElement);
                 imageDiv.classList.remove('image');
