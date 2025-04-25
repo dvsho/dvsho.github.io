@@ -291,12 +291,21 @@ body {
     cursor: pointer;
     border: 2px solid #161E3F;
     background-color: transparent;
-    transition: border-color 0.3s ease-in-out;
+    transition: border-color 0.3s ease-in-out, transform 0.3s ease;
+}
+
+.gallery20 div:hover, .gallery21 div:hover, .gallery22 div:hover, .gallery23 div:hover, .gallery24 div:hover, .gallery25 div:hover {
+    transform: scale(1.03);
 }
 
 @media (max-width: 600px) {
     .gallery20 div, .gallery21 div, .gallery22 div, .gallery23 div, .gallery24 div, .gallery25 div {
         border: 0.8px solid #161E3F;
+        border-radius: 0px;
+    }
+
+    .gallery20 div:hover, .gallery21 div:hover, .gallery22 div:hover, .gallery23 div:hover, .gallery24 div:hover, .gallery25 div:hover {
+        transform: scale(1);
     }
 }
 
