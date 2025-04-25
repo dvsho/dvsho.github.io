@@ -294,6 +294,12 @@ body {
     transition: border-color 0.3s ease-in-out;
 }
 
+@media (max-width: 600px) {
+    .gallery20 div, .gallery21 div, .gallery22 div, .gallery23 div, .gallery24 div, .gallery25 div {
+        border: 0.8px solid #161E3F;
+    }
+}
+
 .gallery20 div.loaded, .gallery21 div.loaded, .gallery22 div.loaded, .gallery23 div.loaded, .gallery24 div.loaded, .gallery25 div.loaded {
     border-color: transparent;
 }
