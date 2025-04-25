@@ -9,17 +9,40 @@ window.addEventListener('scroll', () => {
 });
 
 document.addEventListener('DOMContentLoaded', function () {
-    setTimeout(loadRemainingImages, 1500);
-    function loadRemainingImages() {
-        const imageImages = document.querySelectorAll('.image');
-        imageImages.forEach(imageDiv => {
-            const imgElement = document.createElement('img');
-            imgElement.src = imageDiv.getAttribute('data-src');
-            imgElement.alt = imageDiv.getAttribute('data-alt');
-            imageDiv.prepend(imgElement);
-            imageDiv.classList.remove('image');
-        });
+    const coverImage = document.querySelector('.cover-image img');
+    if (coverImage) {
+        const coverImg = new Image();
+        coverImg.src = coverImage.src;
+        coverImg.onload = () => {
+            coverImage.style.opacity = '1';
+        };
     }
+
+    const imageObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const imageDiv = entry.target;
+                const imgElement = document.createElement('img');
+                imgElement.src = imageDiv.getAttribute('data-src');
+                imgElement.alt = imageDiv.getAttribute('data-alt');
+                imgElement.style.opacity = '0';
+                imgElement.style.transition = 'opacity 0.3s ease-in-out';
+                imgElement.onload = () => {
+                    imgElement.style.opacity = '1';
+                };
+                imageDiv.prepend(imgElement);
+                imageDiv.classList.remove('image');
+                observer.unobserve(imageDiv);
+            }
+        });
+    }, {
+        rootMargin: '50px 0px',
+        threshold: 0.1
+    });
+
+    document.querySelectorAll('.image').forEach(imageDiv => {
+        imageObserver.observe(imageDiv);
+    });
 
     const popup = document.createElement('div');
     popup.classList.add('popup');
@@ -28,28 +51,62 @@ document.addEventListener('DOMContentLoaded', function () {
     document.body.appendChild(popup);
     document.body.appendChild(overlay);
 
-    document.querySelectorAll('.image').forEach(imageDiv => {
-        imageDiv.addEventListener('click', function () {
-            const imgSrc = imageDiv.getAttribute('data-src');
-            const captionText = imageDiv.querySelector('.caption').innerHTML;
+    let currentImageIndex = -1;
+    const allImages = Array.from(document.querySelectorAll('.image'));
+
+    function showImage(index) {
+        if (index < 0) index = allImages.length - 1;
+        if (index >= allImages.length) index = 0;
+        
+        const imageDiv = allImages[index];
+        const imgSrc = imageDiv.getAttribute('data-src');
+        const captionText = imageDiv.querySelector('.caption').innerHTML;
+        const popupImg = new Image();
+        popupImg.src = imgSrc;
+        popupImg.alt = "Popup Image";
+        popupImg.onload = () => {
             popup.innerHTML = `
+                <span class="nav-btn prev-btn">‹</span>
                 <img src="${imgSrc}" alt="Popup Image">
                 <div class="caption-section">${captionText}</div>
                 <span class="close-btn">×</span>
+                <span class="nav-btn next-btn">›</span>
             `;
-
             popup.style.display = 'block';
             overlay.style.display = 'block';
+            currentImageIndex = index;
+
             document.querySelector('.close-btn').addEventListener('click', closePopup);
+            document.querySelector('.prev-btn').addEventListener('click', () => showImage(currentImageIndex - 1));
+            document.querySelector('.next-btn').addEventListener('click', () => showImage(currentImageIndex + 1));
+        };
+    }
+
+    document.querySelectorAll('.image').forEach((imageDiv, index) => {
+        imageDiv.addEventListener('click', function () {
+            showImage(index);
         });
     });
 
     function closePopup() {
         popup.style.display = 'none';
         overlay.style.display = 'none';
+        currentImageIndex = -1;
     }
 
     overlay.addEventListener('click', closePopup);
+    document.addEventListener('keydown', function(e) {
+        const popup = document.querySelector('.popup');
+        if (popup && popup.style.display === 'block') {
+            if (e.key === 'Escape') {
+                closePopup();
+            } else if (e.key === 'ArrowLeft') {
+                showImage(currentImageIndex - 1);
+            } else if (e.key === 'ArrowRight') {
+                showImage(currentImageIndex + 1);
+            }
+        }
+    });
 });
 
 const logo = document.querySelector('.logo');
