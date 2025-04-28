@@ -9,6 +9,34 @@ window.addEventListener('scroll', () => {
 });
 
 document.addEventListener('DOMContentLoaded', function () {
+    const mobilePopup = document.querySelector('.mobile-popup');
+    const dismissBtn = document.querySelector('.mobile-popup .dismiss-btn');
+    const galleryObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting && window.innerWidth <= 600) {
+                mobilePopup.style.display = 'block';
+                mobilePopup.offsetHeight;
+                mobilePopup.classList.add('slide-in');
+                galleryObserver.disconnect();
+            }
+        });
+    }, {
+        threshold: 0.1
+    });
+
+    const firstGallery = document.querySelector('.gallery25');
+    if (firstGallery) {
+        galleryObserver.observe(firstGallery);
+    }
+
+    dismissBtn.addEventListener('click', () => {
+        mobilePopup.classList.add('slide-out');
+        setTimeout(() => {
+            mobilePopup.style.display = 'none';
+            mobilePopup.classList.remove('slide-out');
+        }, 300);
+    });
+
     const coverImage = document.querySelector('.cover-image img');
     if (coverImage) {
         const coverImg = new Image();
