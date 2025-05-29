@@ -170,6 +170,10 @@ body {
 
 .cover-image {
     position: relative;
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
 }
 
 .cover-image img {
@@ -190,6 +194,10 @@ body {
     left: 50%;
     transform: translateX(-50%);
     animation: bob 1s ease-in-out infinite;
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
 }
 
 @media (max-width: 600px) {
