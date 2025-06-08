@@ -147,30 +147,27 @@ logo.addEventListener('click', function() {
     });
 });
 
-document.querySelectorAll('.nav-links a').forEach(link => {
-    link.addEventListener('click', function (e) {
-        e.preventDefault();
-        const linkElement = this;
-        if (linkElement.textContent.includes('Email')) {
-            linkElement.classList.add('bob-up');
-        } else if (linkElement.textContent.includes('Common App')) {
-            linkElement.classList.add('bob-down');
-        } else {
-            linkElement.classList.add('bob-right');
-        }
-
-        linkElement.addEventListener('animationend', function() {
-            linkElement.classList.remove('bob-up', 'bob-down', 'bob-right');
-        });
-
-        setTimeout(() => {
-            const targetUrl = linkElement.href;
-            if (linkElement.textContent.includes('Email')) {
-                window.location.href = targetUrl;
+document.addEventListener('DOMContentLoaded', function() {
+    const navLinks = document.querySelectorAll('.nav-links a');
+    navLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+            e.preventDefault();
+            if (this.textContent.includes('Email')) {
+                this.classList.add('bob-up');
             } else {
-                window.open(targetUrl, '_blank');
+                this.classList.add('bob-right');
             }
-        }, 600);
+            
+            setTimeout(() => {
+                this.classList.add('animate-symbol');
+                setTimeout(() => {
+                    window.open(this.href, '_blank');
+                    setTimeout(() => {
+                        this.classList.remove('bob-up', 'bob-right', 'animate-symbol');
+                    }, 300);
+                }, 450);
+            }, 300);
+        });
     });
 });
 
@@ -178,7 +175,6 @@ document.querySelector('.back-to-top').addEventListener('click', function(e) {
     e.preventDefault();
     const button = this;
     button.classList.add('bob-up');
-
     button.addEventListener('animationend', function() {
         button.classList.remove('bob-up');
     });
