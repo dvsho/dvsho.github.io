@@ -643,3 +643,216 @@ footer {
 .description a.stop-bob {
     animation: none;
 }
+
+.contact-popup {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: min(400px, 80vw);
+    background: linear-gradient(to bottom left, #F0F0E0, #C0C0B0);
+    z-index: 1000;
+    border-radius: 15px;
+    overflow: visible;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    padding: 10px 20px 75px 30px;
+    color: #161E3F;
+    font-family: 'Netflix Sans', sans-serif;
+    text-align: left;
+    opacity: 0;
+    transition: opacity 0.3s ease-out;
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+}
+
+.contact-popup.show {
+    opacity: 1;
+}
+
+.contact-popup .dismiss-btn {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    background-color: #161E3F;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: #F0F0E0;
+    font-size: 1rem;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    transition: transform 0.2s ease;
+    font-family: 'Netflix Sans', sans-serif;
+    z-index: 1001;
+    padding: 8px 16px;
+}
+
+.contact-popup .dismiss-btn:hover {
+    transform: scale(1.1);
+}
+
+@media (max-width: 600px) {
+    .contact-popup {
+        padding: 5px 20px 65px 20px;
+        top: 55%;
+    }
+    
+    .contact-popup .dismiss-btn {
+        bottom: 15px;
+        left: 15px;
+        font-size: 0.9rem;
+        padding: 6px 12px;
+    }
+}
+
+.contact-popup p:first-of-type {
+    font-size: 1.55rem;
+    margin-bottom: 20px;
+}
+
+.contact-popup .email-item {
+    display: flex;
+    align-items: center;
+    margin: 15px 0;
+    gap: 10px;
+    font-size: 1.2rem;
+}
+
+.contact-popup .email-icon {
+    width: 28px;
+    height: 28px;
+    background-color: #161E3F;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #F0F0E0;
+    font-size: 0.9rem;
+    font-family: 'Netflix Sans', sans-serif;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+    position: relative;
+}
+
+.contact-popup .email-icon:hover {
+    transform: scale(1.1);
+}
+
+.contact-popup .email-icon .symbol {
+    display: inline-block;
+    transition: opacity 0.3s ease;
+}
+
+.contact-popup .email-icon .check {
+    position: absolute;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    font-family: 'SF Compact', sans-serif;
+}
+
+.contact-popup .email-icon.animate-symbol .symbol {
+    opacity: 0;
+}
+
+.contact-popup .email-icon.animate-symbol .check {
+    opacity: 1;
+}
+
+.contact-popup .email-link {
+    color: #161E3F;
+    text-decoration: none;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+    user-select: text;
+    -webkit-user-select: text;
+    -moz-user-select: text;
+    -ms-user-select: text;
+}
+
+.contact-popup .phone-section {
+    display: none;
+}
+
+.contact-popup .phone-section p {
+    font-size: 1rem;
+    margin: 15px 0 5px 0;
+}
+
+.contact-popup .phone-item {
+    display: flex;
+    align-items: center;
+    margin: 15px 0;
+    gap: 10px;
+    font-size: 1.2rem;
+}
+
+.contact-popup .phone-icon {
+    width: 28px;
+    height: 28px;
+    background-color: #161E3F;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #F0F0E0;
+    font-size: 1rem;
+    font-family: 'Netflix Sans', sans-serif;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+    position: relative;
+}
+
+.contact-popup .phone-icon:hover {
+    transform: scale(1.1);
+}
+
+.contact-popup .phone-icon .symbol {
+    display: inline-block;
+    transition: opacity 0.3s ease;
+}
+
+.contact-popup .phone-icon .check {
+    position: absolute;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    font-family: 'SF Compact', sans-serif;
+}
+
+.contact-popup .phone-icon.animate-symbol .symbol {
+    opacity: 0;
+}
+
+.contact-popup .phone-icon.animate-symbol .check {
+    opacity: 1;
+}
+
+.contact-popup .phone-number {
+    color: #161E3F;
+    text-decoration: none;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+    user-select: text;
+    -webkit-user-select: text;
+    -moz-user-select: text;
+    -ms-user-select: text;
+    opacity: 1;
+    cursor: default;
+    -webkit-text-fill-color: #161E3F;
+    -webkit-tap-highlight-color: transparent;
+}
+
+@supports (-webkit-touch-callout: none) or (-webkit-appearance: none) {
+    .contact-popup .phone-section {
+        display: block;
+    }
+}
+
+@media (max-width: 600px) {
+    .contact-popup {
+        width: min(300px, 90vw);
+    }
+}

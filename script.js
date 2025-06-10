@@ -149,26 +149,81 @@ logo.addEventListener('click', function() {
 
 document.addEventListener('DOMContentLoaded', function() {
     const navLinks = document.querySelectorAll('.nav-links a');
+    const contactPopup = document.querySelector('.contact-popup');
+    const overlay = document.querySelector('.overlay');
+    const contactLink = document.querySelector('.contact-link');
+    const dismissBtn = contactPopup.querySelector('.dismiss-btn');
+    const emailIcons = contactPopup.querySelectorAll('.email-icon');
+    const phoneIcon = contactPopup.querySelector('.phone-icon');
+
     navLinks.forEach(link => {
         link.addEventListener('click', function(e) {
             e.preventDefault();
-            if (this.textContent.includes('Email')) {
+            if (this.classList.contains('contact-link')) {
                 this.classList.add('bob-up');
+                setTimeout(() => {
+                    this.classList.add('animate-symbol');
+                    setTimeout(() => {
+                        contactPopup.style.display = 'block';
+                        overlay.style.display = 'block';
+                        setTimeout(() => {
+                            contactPopup.classList.add('show');
+                        }, 10);
+                        setTimeout(() => {
+                            this.classList.remove('bob-up', 'animate-symbol');
+                        }, 300);
+                    }, 450);
+                }, 300);
             } else {
                 this.classList.add('bob-right');
-            }
-            
-            setTimeout(() => {
-                this.classList.add('animate-symbol');
                 setTimeout(() => {
-                    window.open(this.href, '_blank');
+                    this.classList.add('animate-symbol');
                     setTimeout(() => {
-                        this.classList.remove('bob-up', 'bob-right', 'animate-symbol');
-                    }, 300);
-                }, 450);
-            }, 300);
+                        window.open(this.href, '_blank');
+                        setTimeout(() => {
+                            this.classList.remove('bob-right', 'animate-symbol');
+                        }, 300);
+                    }, 450);
+                }, 300);
+            }
         });
     });
+
+    emailIcons.forEach(icon => {
+        icon.addEventListener('click', function() {
+            const emailLink = this.nextElementSibling;
+            this.classList.add('animate-symbol');
+            setTimeout(() => {
+                window.location.href = emailLink.href;
+                setTimeout(() => {
+                    this.classList.remove('animate-symbol');
+                }, 300);
+            }, 450);
+        });
+    });
+
+    if (phoneIcon) {
+        phoneIcon.addEventListener('click', function() {
+            this.classList.add('animate-symbol');
+            setTimeout(() => {
+                window.location.href = 'sms:+16306059689';
+                setTimeout(() => {
+                    this.classList.remove('animate-symbol');
+                }, 300);
+            }, 450);
+        });
+    }
+
+    function closeContactPopup() {
+        contactPopup.classList.remove('show');
+        setTimeout(() => {
+            contactPopup.style.display = 'none';
+            overlay.style.display = 'none';
+        }, 300);
+    }
+
+    dismissBtn.addEventListener('click', closeContactPopup);
+    overlay.addEventListener('click', closeContactPopup);
 });
 
 document.querySelector('.back-to-top').addEventListener('click', function(e) {
