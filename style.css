@@ -570,7 +570,7 @@ footer {
     bottom: 20px;
     left: 50%;
     transform: translateX(-50%) translateY(100px);
-    background: linear-gradient(to bottom left, #464E8F, #161E3F);
+    background: linear-gradient(to bottom left, #363E7F, #161E3F);
     color: #F0F0E0;
     padding: 15px 20px;
     border-radius: 10px;
@@ -656,7 +656,7 @@ footer {
     border-radius: 15px;
     overflow: visible;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-    padding: 10px 20px 75px 30px;
+    padding: 15px 20px 75px 30px;
     color: #161E3F;
     font-family: 'Netflix Sans', sans-serif;
     text-align: left;
@@ -711,13 +711,19 @@ footer {
 
 .contact-popup p:first-of-type {
     font-size: 1.55rem;
-    margin-bottom: 20px;
+    margin-bottom: 25px;
+    text-indent: -1.5em;
+    padding-left: 1.5em;
+}
+
+.contact-popup p {
+    margin: 20px 0 10px 0;
 }
 
 .contact-popup .email-item {
     display: flex;
     align-items: center;
-    margin: 15px 0;
+    margin: 10px 0;
     gap: 10px;
     font-size: 1.2rem;
 }
@@ -779,13 +785,13 @@ footer {
 
 .contact-popup .phone-section p {
     font-size: 1rem;
-    margin: 15px 0 5px 0;
+    margin: 20px 0 10px 0;
 }
 
 .contact-popup .phone-item {
     display: flex;
     align-items: center;
-    margin: 15px 0;
+    margin: 10px 0;
     gap: 10px;
     font-size: 1.2rem;
 }
