@@ -96,11 +96,11 @@ document.addEventListener('DOMContentLoaded', function () {
         popupImg.alt = "Popup Image";
         popupImg.onload = () => {
             popup.innerHTML = `
-                <span class="nav-btn prev-btn">‹</span>
+                <span class="nav-btn prev-btn">←</span>
                 <img src="${imgSrc}" alt="Popup Image">
                 <div class="caption-section">${captionText}</div>
                 <span class="close-btn">×</span>
-                <span class="nav-btn next-btn">›</span>
+                <span class="nav-btn next-btn">→</span>
             `;
             popup.style.display = 'block';
             overlay.style.display = 'block';
@@ -115,6 +115,13 @@ document.addEventListener('DOMContentLoaded', function () {
     document.querySelectorAll('.image').forEach((imageDiv, index) => {
         imageDiv.addEventListener('click', function () {
             showImage(index);
+            if (window.innerWidth <= 600) {
+                mobilePopup.classList.add('slide-out');
+                setTimeout(() => {
+                    mobilePopup.style.display = 'none';
+                    mobilePopup.classList.remove('slide-out');
+                }, 300);
+            }
         });
     });
 

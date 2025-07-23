@@ -524,7 +524,7 @@ footer {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    font-size: 4.5rem;
+    font-size: 2rem;
     color: #F0F0E0;
     cursor: pointer;
     padding: 10px;
@@ -534,8 +534,6 @@ footer {
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
-    font-family: 'Ovo', serif;
-    font-weight: 300;
 }
 
 .nav-btn:hover {
@@ -552,7 +550,7 @@ footer {
 
 @media (max-width: 600px) {
     .nav-btn {
-        font-size: 3rem;
+        font-size: 1.6rem;
         padding: 5px;
     }
     
