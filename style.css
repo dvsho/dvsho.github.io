@@ -1,20 +1,20 @@
 @font-face {
     font-family: 'Netflix Sans';
-    src: url('assets/NetflixSans-Regular.otf') format('truetype');
+    src: url('https://a.dvsho.com/NetflixSans-Regular.otf') format('truetype');
     font-weight: normal;
     font-style: normal;
 }
 
 @font-face {
     font-family: 'Ovo';
-    src: url('assets/Ovo-Regular.ttf') format('truetype');
+    src: url('https://a.dvsho.com/Ovo-Regular.ttf') format('truetype');
     font-weight: normal;
     font-style: normal;
 }
 
 @font-face {
     font-family: 'SF Compact';
-    src: url('assets/SF-Compact.ttf') format('truetype');
+    src: url('https://a.dvsho.com/SF-Compact.ttf') format('truetype');
     font-weight: normal;
     font-style: normal;
 }
