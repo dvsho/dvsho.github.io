@@ -728,15 +728,15 @@ footer {
 }
 
 .contact-popup .email-icon {
-    width: 28px;
-    height: 28px;
+    width: 200px;
+    height: 30px;
     background-color: #161E3F;
     border-radius: 6px;
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: left;
     color: #F0F0E0;
-    font-size: 1.1rem;
+    font-size: 1rem;
     font-family: 'Netflix Sans', sans-serif;
     cursor: pointer;
     transition: transform 0.2s ease;
@@ -744,7 +744,7 @@ footer {
 }
 
 .contact-popup .email-icon:hover {
-    transform: scale(1.1);
+    transform: scale(1.05);
 }
 
 .contact-popup .email-icon .symbol {
@@ -776,84 +776,6 @@ footer {
     -webkit-user-select: text;
     -moz-user-select: text;
     -ms-user-select: text;
-}
-
-.contact-popup .phone-section {
-    display: none;
-}
-
-.contact-popup .phone-section p {
-    font-size: 1rem;
-    margin: 20px 0 10px 0;
-}
-
-.contact-popup .phone-item {
-    display: flex;
-    align-items: center;
-    margin: 10px 0;
-    gap: 10px;
-    font-size: 1.2rem;
-}
-
-.contact-popup .phone-icon {
-    width: 28px;
-    height: 28px;
-    background-color: #161E3F;
-    border-radius: 6px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #F0F0E0;
-    font-size: 1.1rem;
-    font-family: 'Netflix Sans', sans-serif;
-    cursor: pointer;
-    transition: transform 0.2s ease;
-    position: relative;
-}
-
-.contact-popup .phone-icon:hover {
-    transform: scale(1.1);
-}
-
-.contact-popup .phone-icon .symbol {
-    display: inline-block;
-    transition: opacity 0.3s ease;
-}
-
-.contact-popup .phone-icon .check {
-    position: absolute;
-    opacity: 0;
-    transition: opacity 0.3s ease;
-    font-family: 'SF Compact', sans-serif;
-}
-
-.contact-popup .phone-icon.animate-symbol .symbol {
-    opacity: 0;
-}
-
-.contact-popup .phone-icon.animate-symbol .check {
-    opacity: 1;
-}
-
-.contact-popup .phone-number {
-    color: #161E3F;
-    text-decoration: none;
-    transition: opacity 0.3s ease;
-    pointer-events: none;
-    user-select: text;
-    -webkit-user-select: text;
-    -moz-user-select: text;
-    -ms-user-select: text;
-    opacity: 1;
-    cursor: default;
-    -webkit-text-fill-color: #161E3F;
-    -webkit-tap-highlight-color: transparent;
-}
-
-@supports (-webkit-touch-callout: none) or (-webkit-appearance: none) {
-    .contact-popup .phone-section {
-        display: block;
-    }
 }
 
 @media (max-width: 600px) {
