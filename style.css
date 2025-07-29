@@ -234,6 +234,10 @@ body {
     font-size: 1.2rem;
     text-align: left;
     color: #161E3F;
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
 }
 
 .year-header {
@@ -272,6 +276,10 @@ body {
     gap: 12px;
     padding: 0 120px;
     margin-bottom: 80px;
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
 }
 
 @media (max-width: 1200px) {
@@ -440,6 +448,10 @@ footer {
     position: relative;
     bottom: 0;
     width: 100%;
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
 }
 
 .footer-left {
@@ -492,6 +504,10 @@ footer {
     border-radius: 10px;
     transition: background-color 0.3s ease;
     font-family: 'Netflix Sans', sans-serif;
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
 }
 
 .back-to-top:hover {
