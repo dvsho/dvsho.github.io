@@ -666,7 +666,7 @@ footer {
     left: 50%;
     transform: translate(-50%, -50%);
     width: min(400px, 80vw);
-    background: linear-gradient(to bottom left, #F0F0E0, #C0C0B0);
+    background: linear-gradient(to bottom left, #F0F0E0, #D0D0C0);
     z-index: 1000;
     border-radius: 15px;
     overflow: visible;
