@@ -1,14 +1,7 @@
 @font-face {
-    font-family: 'Netflix Sans';
-    src: url('https://a.dvsho.com/NetflixSans-Regular.otf') format('truetype');
-    font-weight: normal;
-    font-style: normal;
-}
-
-@font-face {
-    font-family: 'Ovo';
-    src: url('https://a.dvsho.com/Ovo-Regular.ttf') format('truetype');
-    font-weight: normal;
+    font-family: 'Bricolage';
+    src: url('https://a.dvsho.com/Bricolage.ttf') format('truetype');
+    font-weight: 100 900;
     font-style: normal;
 }
 
@@ -22,7 +15,8 @@
 body {
     margin: 0;
     padding: 0;
-    font-family: 'Netflix Sans', sans-serif;
+    font-family: 'Bricolage', sans-serif;
+    font-weight: 300;
     background-color: #F0F0E0;
     color: #fff;
     transition: background-color 0.5s, color 0.5s;
@@ -97,6 +91,7 @@ body {
 .nav-links a .symbol {
     display: inline-block;
     transition: opacity 0.3s ease;
+    font-family: 'SF Compact', sans-serif;
 }
 
 .nav-links a .check {
@@ -213,6 +208,7 @@ body {
     font-size: 4rem;
     color: #F0F0E0;
     text-decoration: none;
+    font-family: 'SF Compact', sans-serif;
 }
 
 @keyframes bob {
@@ -228,10 +224,11 @@ body {
 }
 
 .description {
-    font-family: 'Ovo', serif;
+    font-family: 'Bricolage', sans-serif;
+    font-weight: 300;
     padding: 60px 120px;
     padding-bottom: 10px;
-    font-size: 1.2rem;
+    font-size: 1.1rem;
     text-align: left;
     color: #161E3F;
     user-select: none;
@@ -241,7 +238,8 @@ body {
 }
 
 .year-header {
-    font-family: 'Ovo', serif;
+    font-family: 'Bricolage', sans-serif;
+    font-weight: 400;
     padding: 0 120px;
     margin-top: 40px;
     margin-bottom: 20px;
@@ -384,7 +382,8 @@ body {
 }
 
 .popup .caption-section {
-    font-family: 'Ovo', serif;
+    font-family: 'Bricolage', sans-serif;
+    font-weight: 300;
     background-color: #161E3F;
     color: #F0F0E0;
     text-align: center;
@@ -455,10 +454,15 @@ footer {
 }
 
 .footer-left {
-    font-family: 'Ovo', serif;
+    font-family: 'Bricolage', sans-serif;
+    font-weight: 300;
     flex: 1;
     text-align: left;
     padding: 0px 120px;
+}
+
+.footer-left p:first-child {
+    font-weight: 500;
 }
 
 .footer-right {
@@ -503,7 +507,8 @@ footer {
     border: 2px solid #F0F0E0;
     border-radius: 10px;
     transition: background-color 0.3s ease;
-    font-family: 'Netflix Sans', sans-serif;
+    font-family: 'Bricolage', sans-serif;
+    font-weight: 400;
     user-select: none;
     -webkit-user-select: none;
     -moz-user-select: none;
@@ -517,6 +522,10 @@ footer {
 
 .back-to-top.bob-up {
     animation: buttonBobUp 0.4s forwards;
+}
+
+.back-to-top .arrow-symbol {
+    font-family: 'SF Compact', sans-serif;
 }
 
 @keyframes buttonBobUp {
@@ -591,7 +600,8 @@ footer {
     border-radius: 10px;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
     z-index: 1000;
-    font-family: 'Ovo', serif;
+    font-family: 'Bricolage', sans-serif;
+    font-weight: 300;
     font-size: 0.9rem;
     text-align: center;
     max-width: 150px;
@@ -655,8 +665,8 @@ footer {
     animation: subtleBob 2s ease-in-out infinite;
 }
 
-.description a.stop-bob {
-    animation: none;
+.description p:first-child {
+    font-weight: 400;
 }
 
 .contact-popup {
@@ -673,7 +683,8 @@ footer {
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
     padding: 15px 20px 75px 30px;
     color: #161E3F;
-    font-family: 'Netflix Sans', sans-serif;
+    font-family: 'Bricolage', sans-serif;
+    font-weight: 300;
     text-align: left;
     opacity: 0;
     transition: opacity 0.3s ease-out;
@@ -701,7 +712,8 @@ footer {
     font-size: 1rem;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
     transition: transform 0.2s ease;
-    font-family: 'Netflix Sans', sans-serif;
+    font-family: 'Bricolage', sans-serif;
+    font-weight: 300;
     z-index: 1001;
     padding: 8px 16px;
 }
@@ -722,10 +734,15 @@ footer {
         font-size: 0.9rem;
         padding: 6px 12px;
     }
+    
+    .contact-popup p:first-of-type {
+        font-size: 1.3rem;
+    }
 }
 
 .contact-popup p:first-of-type {
-    font-size: 1.55rem;
+    font-size: 1.5rem;
+    font-weight: 400;
     margin-bottom: 25px;
     text-indent: -1.5em;
     padding-left: 1.5em;
@@ -753,7 +770,8 @@ footer {
     justify-content: left;
     color: #F0F0E0;
     font-size: 1rem;
-    font-family: 'Netflix Sans', sans-serif;
+    font-family: 'Bricolage', sans-serif;
+    font-weight: 300;
     cursor: pointer;
     transition: transform 0.2s ease;
     position: relative;
@@ -766,6 +784,7 @@ footer {
 .contact-popup .email-icon .symbol {
     display: inline-block;
     transition: opacity 0.3s ease;
+    font-family: 'SF Compact', sans-serif;
 }
 
 .contact-popup .email-icon .check {
