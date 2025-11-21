@@ -260,3 +260,70 @@ document.querySelector('.back-to-top').addEventListener('click', function(e) {
         requestAnimationFrame(scroll);
     }, 600);
 });
+
+// Essay popup functionality
+document.addEventListener('DOMContentLoaded', function() {
+    const essayPopup = document.querySelector('.essay-popup');
+    const essayCloseBtn = document.querySelector('.essay-close-btn');
+    const essayText = document.querySelector('.essay-text');
+    const overlay = document.querySelector('.overlay');
+    
+    // Function to load essay content
+    async function loadEssayContent() {
+        try {
+            const response = await fetch('essay.txt');
+            const content = await response.text();
+            essayText.textContent = content;
+        } catch (error) {
+            console.error('Error loading essay content:', error);
+            essayText.textContent = 'Sorry, the essay content could not be loaded at this time.';
+        }
+    }
+    
+    let scrollPosition = 0;
+    
+    // Function to show essay popup
+    function showEssayPopup() {
+        loadEssayContent();
+        scrollPosition = window.pageYOffset;
+        document.body.style.top = `-${scrollPosition}px`;
+        document.body.classList.add('popup-active');
+        essayPopup.style.display = 'block';
+        overlay.style.display = 'block';
+        setTimeout(() => {
+            essayPopup.classList.add('show');
+        }, 10);
+    }
+    
+    // Function to close essay popup
+    function closeEssayPopup() {
+        essayPopup.classList.remove('show');
+        setTimeout(() => {
+            essayPopup.style.display = 'none';
+            overlay.style.display = 'none';
+            document.body.classList.remove('popup-active');
+            document.body.style.top = '';
+            window.scrollTo(0, scrollPosition);
+        }, 300);
+    }
+    
+    // Close button event listener
+    essayCloseBtn.addEventListener('click', closeEssayPopup);
+    
+    // Close on overlay click
+    overlay.addEventListener('click', function(e) {
+        if (essayPopup.style.display === 'block') {
+            closeEssayPopup();
+        }
+    });
+    
+    // Close on Escape key
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && essayPopup.classList.contains('show')) {
+            closeEssayPopup();
+        }
+    });
+    
+    // Make the essay popup function globally accessible
+    window.showEssayPopup = showEssayPopup;
+});
