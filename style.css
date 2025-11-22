@@ -33,7 +33,6 @@ html::-webkit-scrollbar {
     background: transparent;
 }
 
-/* Prevent background scrolling when popup is active */
 body.popup-active {
     overflow: hidden;
     position: fixed;
@@ -635,7 +634,7 @@ footer {
     font-weight: 300;
     font-size: 0.9rem;
     text-align: center;
-    max-width: 150px;
+    max-width: 180px;
     transition: transform 0.3s ease-out, opacity 0.3s ease-out;
     opacity: 0;
 }

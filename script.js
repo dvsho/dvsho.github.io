@@ -261,14 +261,11 @@ document.querySelector('.back-to-top').addEventListener('click', function(e) {
     }, 600);
 });
 
-// Essay popup functionality
 document.addEventListener('DOMContentLoaded', function() {
     const essayPopup = document.querySelector('.essay-popup');
     const essayCloseBtn = document.querySelector('.essay-close-btn');
     const essayText = document.querySelector('.essay-text');
     const overlay = document.querySelector('.overlay');
-    
-    // Function to load essay content
     async function loadEssayContent() {
         try {
             const response = await fetch('essay.txt');
@@ -281,8 +278,6 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     
     let scrollPosition = 0;
-    
-    // Function to show essay popup
     function showEssayPopup() {
         loadEssayContent();
         scrollPosition = window.pageYOffset;
@@ -295,7 +290,6 @@ document.addEventListener('DOMContentLoaded', function() {
         }, 10);
     }
     
-    // Function to close essay popup
     function closeEssayPopup() {
         essayPopup.classList.remove('show');
         setTimeout(() => {
@@ -307,23 +301,18 @@ document.addEventListener('DOMContentLoaded', function() {
         }, 300);
     }
     
-    // Close button event listener
     essayCloseBtn.addEventListener('click', closeEssayPopup);
-    
-    // Close on overlay click
     overlay.addEventListener('click', function(e) {
         if (essayPopup.style.display === 'block') {
             closeEssayPopup();
         }
     });
     
-    // Close on Escape key
     document.addEventListener('keydown', function(e) {
         if (e.key === 'Escape' && essayPopup.classList.contains('show')) {
             closeEssayPopup();
         }
     });
     
-    // Make the essay popup function globally accessible
     window.showEssayPopup = showEssayPopup;
 });
