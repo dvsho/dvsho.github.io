@@ -72,6 +72,10 @@ body {
     z-index: 1000;
     text-align: left;
     cursor: pointer;
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
 }
 
 .logo img {
@@ -102,6 +106,10 @@ body {
     z-index: 1000;
     color: #F0F0E0;
     text-align: right;
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
 }
 
 .nav-links a {
@@ -381,6 +389,10 @@ body {
     opacity: 0;
     transition: opacity 0.3s ease-in-out;
     z-index: 2;
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
 }
 
 .gallery20 img.loaded, .gallery21 img.loaded, .gallery22 img.loaded, .gallery23 img.loaded, .gallery24 img.loaded, .gallery25 img.loaded {
@@ -403,6 +415,10 @@ body {
     border-radius: 15px;
     overflow: hidden;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
 }
 
 .popup img {
@@ -421,6 +437,10 @@ body {
     height: 100px;
     box-sizing: border-box;
     font-size: 1.1rem;
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
 }
 
 @media (max-width: 600px) {
@@ -438,6 +458,10 @@ body {
     cursor: pointer;
     z-index: 1001;
     transition: opacity 0.3s ease;
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
     user-select: none;
     -webkit-user-select: none;
     -moz-user-select: none;
@@ -869,10 +893,18 @@ footer {
     font-family: 'Bricolage', sans-serif;
     font-weight: 300;
     text-align: left;
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
 }
 
 .essay-popup.show {
     opacity: 1;
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
 }
 
 .essay-content {
@@ -880,6 +912,10 @@ footer {
     height: 100%;
     overflow: hidden;
     border-radius: 15px;
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
 }
 
 .essay-text {
@@ -894,6 +930,10 @@ footer {
     text-align: left;
     white-space: pre-wrap;
     box-sizing: border-box;
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
 }
 
 .essay-text::first-line {
