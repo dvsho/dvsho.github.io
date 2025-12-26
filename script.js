@@ -161,7 +161,6 @@ document.addEventListener('DOMContentLoaded', function() {
     const contactLink = document.querySelector('.contact-link');
     const dismissBtn = contactPopup.querySelector('.dismiss-btn');
     const emailIcons = contactPopup.querySelectorAll('.email-icon');
-    const phoneIcon = contactPopup.querySelector('.phone-icon');
 
     navLinks.forEach(link => {
         link.addEventListener('click', function(e) {
@@ -208,18 +207,6 @@ document.addEventListener('DOMContentLoaded', function() {
             }, 450);
         });
     });
-
-    if (phoneIcon) {
-        phoneIcon.addEventListener('click', function() {
-            this.classList.add('animate-symbol');
-            setTimeout(() => {
-                window.location.href = 'sms:+16306059689';
-                setTimeout(() => {
-                    this.classList.remove('animate-symbol');
-                }, 300);
-            }, 450);
-        });
-    }
 
     function closeContactPopup() {
         contactPopup.classList.remove('show');

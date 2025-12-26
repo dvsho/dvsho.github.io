@@ -8,16 +8,26 @@
 }
 
 @font-face {
-    font-family: 'Bricolage';
-    src: url('https://a.dvsho.com/Bricolage.ttf') format('truetype');
-    font-weight: 100 900;
+    font-family: 'H Regular';
+    src: url('https://a.dvsho.com/fonts/Hellix-Regular.ttf') format('truetype');
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'H Medium';
+    src: url('https://a.dvsho.com/fonts/Hellix-Medium.ttf') format('truetype');
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'H Semibold';
+    src: url('https://a.dvsho.com/fonts/Hellix-SemiBold.ttf') format('truetype');
     font-style: normal;
 }
 
 @font-face {
     font-family: 'SF Compact';
-    src: url('https://a.dvsho.com/SF-Compact.ttf') format('truetype');
-    font-weight: normal;
+    src: url('https://a.dvsho.com/fonts/SF-Compact.ttf') format('truetype');
     font-style: normal;
 }
 
@@ -42,8 +52,7 @@ body.popup-active {
 body {
     margin: 0;
     padding: 0;
-    font-family: 'Bricolage', sans-serif;
-    font-weight: 300;
+    font-family: 'H Regular', sans-serif;
     background-color: #F0F0E0;
     color: #fff;
     transition: background-color 0.5s, color 0.5s;
@@ -129,7 +138,6 @@ body {
 .nav-links a .symbol {
     display: inline-block;
     transition: opacity 0.3s ease;
-    font-family: 'SF Compact', sans-serif;
 }
 
 .nav-links a .check {
@@ -246,7 +254,6 @@ body {
     font-size: 4rem;
     color: #F0F0E0;
     text-decoration: none;
-    font-family: 'SF Compact', sans-serif;
 }
 
 @keyframes bob {
@@ -262,13 +269,12 @@ body {
 }
 
 .description {
-    font-family: 'Bricolage', sans-serif;
-    font-weight: 300;
+    font-family: 'H Regular', sans-serif;
     padding: 60px 120px;
     padding-bottom: 10px;
     font-size: 1.1rem;
     text-align: left;
-    color: #161E3F;
+    color: #101830;
     user-select: none;
     -webkit-user-select: none;
     -moz-user-select: none;
@@ -276,13 +282,12 @@ body {
 }
 
 .year-header {
-    font-family: 'Bricolage', sans-serif;
-    font-weight: 400;
+    font-family: 'H Regular', sans-serif;
     padding: 0 120px;
     margin-top: 40px;
     margin-bottom: 20px;
     font-size: 1.2rem;
-    color: #161E3F;
+    color: #101830;
     display: flex;
     align-items: center;
     gap: 10px;
@@ -302,7 +307,7 @@ body {
     content: "";
     flex-grow: 1;
     height: 2px;
-    background-color: #161E3F;
+    background-color: #101830;
     margin-left: 10px;
 }
 
@@ -355,7 +360,7 @@ body {
     overflow: hidden;
     border-radius: 12px;
     cursor: pointer;
-    border: 2px solid #161E3F;
+    border: 2px solid #101830;
     background-color: transparent;
     transition: border-color 0.3s ease-in-out, transform 0.3s ease;
 }
@@ -366,7 +371,7 @@ body {
 
 @media (max-width: 600px) {
     .gallery20 div, .gallery21 div, .gallery22 div, .gallery23 div, .gallery24 div, .gallery25 div {
-        border: 0.8px solid #161E3F;
+        border: 0.8px solid #101830;
         border-radius: 0px;
     }
 
@@ -410,7 +415,7 @@ body {
     left: 50%;
     transform: translate(-50%, -50%);
     width: min(600px, 80vw);
-    background-color: #161E3F;
+    background-color: #101830;
     z-index: 1000;
     border-radius: 15px;
     overflow: hidden;
@@ -428,9 +433,8 @@ body {
 }
 
 .popup .caption-section {
-    font-family: 'Bricolage', sans-serif;
-    font-weight: 300;
-    background-color: #161E3F;
+    font-family: 'H Regular', sans-serif;
+    background-color: #101830;
     color: #F0F0E0;
     text-align: center;
     padding: 25px;
@@ -496,7 +500,7 @@ footer {
     justify-content: space-between;
     align-items: center;
     padding: 50px 0px;
-    background-color: #161E3F;
+    background-color: #101830;
     color: #F0F0E0;
     position: relative;
     bottom: 0;
@@ -508,15 +512,10 @@ footer {
 }
 
 .footer-left {
-    font-family: 'Bricolage', sans-serif;
-    font-weight: 300;
+    font-family: 'H Medium', sans-serif;
     flex: 1;
     text-align: left;
     padding: 0px 120px;
-}
-
-.footer-left p:first-child {
-    font-weight: 500;
 }
 
 .footer-right {
@@ -549,7 +548,7 @@ footer {
 
 .back-to-top {
     background-color: #F0F0E0;
-    color: #161E3F;
+    color: #101830;
     border: none;
     padding: 9px 18px;
     text-align: center;
@@ -561,8 +560,7 @@ footer {
     border: 2px solid #F0F0E0;
     border-radius: 10px;
     transition: background-color 0.3s ease;
-    font-family: 'Bricolage', sans-serif;
-    font-weight: 400;
+    font-family: 'H Medium', sans-serif;
     user-select: none;
     -webkit-user-select: none;
     -moz-user-select: none;
@@ -570,16 +568,12 @@ footer {
 }
 
 .back-to-top:hover {
-    background-color: #161E3F;
+    background-color: #101830;
     color: #F0F0E0;
 }
 
 .back-to-top.bob-up {
     animation: buttonBobUp 0.4s forwards;
-}
-
-.back-to-top .arrow-symbol {
-    font-family: 'SF Compact', sans-serif;
 }
 
 @keyframes buttonBobUp {
@@ -648,14 +642,13 @@ footer {
     bottom: 20px;
     left: 50%;
     transform: translateX(-50%) translateY(100px);
-    background: linear-gradient(to bottom left, #363E7F, #161E3F);
+    background: linear-gradient(to bottom left, #363E7F, #101830);
     color: #F0F0E0;
     padding: 15px 20px;
     border-radius: 10px;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
     z-index: 1000;
-    font-family: 'Bricolage', sans-serif;
-    font-weight: 300;
+    font-family: 'H Regular', sans-serif;
     font-size: 0.9rem;
     text-align: center;
     max-width: 180px;
@@ -685,7 +678,7 @@ footer {
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    color: #161E3F;
+    color: #101830;
     font-size: 1rem;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
     transition: transform 0.2s ease;
@@ -720,7 +713,7 @@ footer {
 }
 
 .description p:first-child {
-    font-weight: 400;
+    font-family: 'H Medium', sans-serif;
 }
 
 .contact-popup {
@@ -736,9 +729,8 @@ footer {
     overflow: visible;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
     padding: 15px 20px 75px 30px;
-    color: #161E3F;
-    font-family: 'Bricolage', sans-serif;
-    font-weight: 300;
+    color: #101830;
+    font-family: 'H Regular', sans-serif;
     text-align: left;
     opacity: 0;
     transition: opacity 0.3s ease-out;
@@ -756,7 +748,7 @@ footer {
     position: absolute;
     bottom: 20px;
     left: 20px;
-    background-color: #161E3F;
+    background-color: #101830;
     border-radius: 10px;
     display: flex;
     align-items: center;
@@ -766,8 +758,7 @@ footer {
     font-size: 1rem;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
     transition: transform 0.2s ease;
-    font-family: 'Bricolage', sans-serif;
-    font-weight: 300;
+    font-family: 'H Regular', sans-serif;
     z-index: 1001;
     padding: 8px 16px;
 }
@@ -796,7 +787,7 @@ footer {
 
 .contact-popup p:first-of-type {
     font-size: 1.5rem;
-    font-weight: 400;
+    font-family: 'H Medium', sans-serif;
     margin-bottom: 25px;
     text-indent: -1.5em;
     padding-left: 1.5em;
@@ -817,15 +808,14 @@ footer {
 .contact-popup .email-icon {
     width: 200px;
     height: 30px;
-    background-color: #161E3F;
+    background-color: #101830;
     border-radius: 6px;
     display: flex;
     align-items: center;
     justify-content: left;
     color: #F0F0E0;
     font-size: 1rem;
-    font-family: 'Bricolage', sans-serif;
-    font-weight: 300;
+    font-family: 'H Regular', sans-serif;
     cursor: pointer;
     transition: transform 0.2s ease;
     position: relative;
@@ -857,7 +847,7 @@ footer {
 }
 
 .contact-popup .email-link {
-    color: #161E3F;
+    color: #101830;
     text-decoration: none;
     transition: opacity 0.3s ease;
     pointer-events: none;
@@ -889,9 +879,8 @@ footer {
     opacity: 0;
     transition: opacity 0.3s ease-out;
     padding: 15px 20px 75px 30px;
-    color: #161E3F;
-    font-family: 'Bricolage', sans-serif;
-    font-weight: 300;
+    color: #101830;
+    font-family: 'H Regular', sans-serif;
     text-align: left;
     user-select: none;
     -webkit-user-select: none;
@@ -922,9 +911,8 @@ footer {
     height: 100%;
     padding: 25px 10px 20px 0px;
     overflow-y: auto;
-    color: #161E3F;
-    font-family: 'Bricolage', sans-serif;
-    font-weight: 300;
+    color: #101830;
+    font-family: 'H Regular', sans-serif;
     font-size: 1.05rem;
     line-height: 1.6;
     text-align: left;
@@ -937,7 +925,7 @@ footer {
 }
 
 .essay-text::first-line {
-    font-weight: 500;
+    font-family: 'H Semibold', sans-serif;
 }
 
 .essay-text::-webkit-scrollbar {
@@ -953,7 +941,7 @@ footer {
     position: absolute;
     bottom: 20px;
     left: 20px;
-    background-color: #161E3F;
+    background-color: #101830;
     border-radius: 10px;
     display: flex;
     align-items: center;
@@ -963,8 +951,7 @@ footer {
     font-size: 1rem;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
     transition: transform 0.2s ease;
-    font-family: 'Bricolage', sans-serif;
-    font-weight: 300;
+    font-family: 'H Regular', sans-serif;
     z-index: 1001;
     padding: 8px 16px;
     user-select: none;
