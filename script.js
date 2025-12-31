@@ -147,11 +147,18 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 const logo = document.querySelector('.logo');
+let currentRotation = 0;
+
 logo.addEventListener('click', function() {
+    const randomRotation = 30 + Math.random() * 300;
+    currentRotation += randomRotation;
+    logo.style.setProperty('--current-rotation', `${currentRotation - randomRotation}deg`);
+    logo.style.setProperty('--target-rotation', `${currentRotation}deg`);
     logo.classList.add('spin');
     logo.addEventListener('animationend', function() {
         logo.classList.remove('spin');
-    });
+        logo.style.transform = `rotate(${currentRotation}deg)`;
+    }, { once: true });
 });
 
 document.addEventListener('DOMContentLoaded', function() {

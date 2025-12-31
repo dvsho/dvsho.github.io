@@ -93,18 +93,17 @@ body {
 }
 
 .logo.spin {
-    animation: spinScale 1s ease forwards;
+    animation: spinRotate 1s ease forwards;
+    --random-rotation: 0deg;
+    --current-rotation: 0deg;
 }
 
-@keyframes spinScale {
+@keyframes spinRotate {
     0% {
-        transform: rotate(0deg) scale(1);
-    }
-    50% {
-        transform: rotate(180deg) scale(1.1);
+        transform: rotate(var(--current-rotation));
     }
     100% {
-        transform: rotate(360deg) scale(1);
+        transform: rotate(var(--target-rotation));
     }
 }
 
