@@ -97,19 +97,23 @@ document.addEventListener('DOMContentLoaded', function () {
         popupImg.alt = "Popup Image";
         popupImg.onload = () => {
             popup.innerHTML = `
-                <span class="nav-btn prev-btn">←</span>
-                <img src="${imgSrc}" alt="Popup Image">
-                <div class="caption-section">${captionText}</div>
-                <span class="close-btn">×</span>
-                <span class="nav-btn next-btn">→</span>
+                <div class="popup-card">
+                    <img src="${imgSrc}" alt="Popup Image">
+                    <div class="caption-section">${captionText}</div>
+                </div>
+                <div class="popup-controls">
+                    <div class="control-btn prev-btn">←</div>
+                    <div class="control-btn close-btn">×</div>
+                    <div class="control-btn next-btn">→</div>
+                </div>
             `;
             popup.style.display = 'block';
             overlay.style.display = 'block';
             currentImageIndex = index;
 
-            document.querySelector('.close-btn').addEventListener('click', closePopup);
-            document.querySelector('.prev-btn').addEventListener('click', () => showImage(currentImageIndex - 1));
-            document.querySelector('.next-btn').addEventListener('click', () => showImage(currentImageIndex + 1));
+            popup.querySelector('.close-btn').addEventListener('click', closePopup);
+            popup.querySelector('.prev-btn').addEventListener('click', () => showImage(currentImageIndex - 1));
+            popup.querySelector('.next-btn').addEventListener('click', () => showImage(currentImageIndex + 1));
         };
     }
 
@@ -185,6 +189,14 @@ document.addEventListener('DOMContentLoaded', function () {
             if (this.classList.contains('contact-link')) {
                 this.classList.add('bob-up');
                 setTimeout(() => {
+                    if (easterEggPopup.classList.contains('show')) {
+                        easterEggPopup.classList.remove('show');
+                        setTimeout(() => {
+                            easterEggPopup.style.display = 'none';
+                        }, 300);
+                        contactPopup.dataset.triggeringPopup = 'easterEgg';
+                    }
+
                     if (!document.body.classList.contains('popup-active')) {
                         scrollPosition = window.pageYOffset;
                         document.body.style.top = `-${scrollPosition}px`;
@@ -244,6 +256,16 @@ document.addEventListener('DOMContentLoaded', function () {
         contactPopup.classList.remove('show');
         setTimeout(() => {
             contactPopup.style.display = 'none';
+
+            if (contactPopup.dataset.triggeringPopup === 'easterEgg') {
+                delete contactPopup.dataset.triggeringPopup;
+                easterEggPopup.style.display = 'block';
+                setTimeout(() => {
+                    easterEggPopup.classList.add('show');
+                }, 10);
+                return;
+            }
+
             if (!easterEggPopup.classList.contains('show')) {
                 overlay.style.display = 'none';
                 if (document.body.classList.contains('popup-active') && !essayPopup.classList.contains('show')) {
@@ -279,6 +301,15 @@ document.addEventListener('DOMContentLoaded', function () {
             spread: 180,
             origin: { y: 0.6 }
         });
+
+        if (contactPopup.classList.contains('show')) {
+            contactPopup.classList.remove('show');
+            setTimeout(() => {
+                contactPopup.style.display = 'none';
+            }, 300);
+            easterEggPopup.dataset.triggeringPopup = 'contact';
+        }
+
         if (!document.body.classList.contains('popup-active')) {
             scrollPosition = window.pageYOffset;
             document.body.style.top = `-${scrollPosition}px`;
@@ -295,7 +326,18 @@ document.addEventListener('DOMContentLoaded', function () {
         easterEggPopup.classList.remove('show');
         setTimeout(() => {
             easterEggPopup.style.display = 'none';
-            if (!contactPopup.classList.contains('show')) {
+
+            let restoring = false;
+            if (easterEggPopup.dataset.triggeringPopup === 'contact') {
+                delete easterEggPopup.dataset.triggeringPopup;
+                contactPopup.style.display = 'block';
+                setTimeout(() => {
+                    contactPopup.classList.add('show');
+                }, 10);
+                restoring = true;
+            }
+
+            if (!restoring && !contactPopup.classList.contains('show')) {
                 overlay.style.display = 'none';
                 if (document.body.classList.contains('popup-active') && !essayPopup.classList.contains('show')) {
                     document.body.classList.remove('popup-active');
