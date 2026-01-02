@@ -131,7 +131,6 @@ document.addEventListener('DOMContentLoaded', function () {
         currentImageIndex = -1;
     }
 
-    overlay.addEventListener('click', closePopup);
     document.addEventListener('keydown', function(e) {
         const popup = document.querySelector('.popup');
         if (popup && popup.style.display === 'block') {
@@ -144,30 +143,40 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         }
     });
-});
 
-const logo = document.querySelector('.logo');
-let currentRotation = 0;
+    const logo = document.querySelector('.logo');
+    let currentRotation = 0;
+    let logoClickCount = 0;
+    let easterEggFound = false;
 
-logo.addEventListener('click', function() {
-    const randomRotation = 30 + Math.random() * 300;
-    currentRotation += randomRotation;
-    logo.style.setProperty('--current-rotation', `${currentRotation - randomRotation}deg`);
-    logo.style.setProperty('--target-rotation', `${currentRotation}deg`);
-    logo.classList.add('spin');
-    logo.addEventListener('animationend', function() {
-        logo.classList.remove('spin');
-        logo.style.transform = `rotate(${currentRotation}deg)`;
-    }, { once: true });
-});
+    logo.addEventListener('click', function() {
+        const randomRotation = 30 + Math.random() * 300;
+        currentRotation += randomRotation;
+        logo.style.setProperty('--current-rotation', `${currentRotation - randomRotation}deg`);
+        logo.style.setProperty('--target-rotation', `${currentRotation}deg`);
+        logo.classList.add('spin');
+        logo.addEventListener('animationend', function() {
+            logo.classList.remove('spin');
+            logo.style.transform = `rotate(${currentRotation}deg)`;
+        }, { once: true });
 
-document.addEventListener('DOMContentLoaded', function() {
+        if (!easterEggFound) {
+            logoClickCount++;
+            if (logoClickCount === 5) {
+                showEasterEggPopup();
+                easterEggFound = true;
+            }
+        }
+    });
+
     const navLinks = document.querySelectorAll('.nav-links a');
-    const contactPopup = document.querySelector('.contact-popup');
-    const overlay = document.querySelector('.overlay');
+    const contactPopup = document.querySelector('.contact-popup:not(.easter-egg-popup)');
+    const easterEggPopup = document.querySelector('.easter-egg-popup');
     const contactLink = document.querySelector('.contact-link');
-    const dismissBtn = contactPopup.querySelector('.dismiss-btn');
+    const contactDismissBtn = contactPopup.querySelector('.dismiss-btn');
+    const easterEggDismissBtn = easterEggPopup.querySelector('.dismiss-btn');
     const emailIcons = contactPopup.querySelectorAll('.email-icon');
+    const socialIcons = contactPopup.querySelectorAll('.social-icon');
 
     navLinks.forEach(link => {
         link.addEventListener('click', function(e) {
@@ -175,17 +184,14 @@ document.addEventListener('DOMContentLoaded', function() {
             if (this.classList.contains('contact-link')) {
                 this.classList.add('bob-up');
                 setTimeout(() => {
-                    this.classList.add('animate-symbol');
+                    contactPopup.style.display = 'block';
+                    overlay.style.display = 'block';
                     setTimeout(() => {
-                        contactPopup.style.display = 'block';
-                        overlay.style.display = 'block';
-                        setTimeout(() => {
-                            contactPopup.classList.add('show');
-                        }, 10);
-                        setTimeout(() => {
-                            this.classList.remove('bob-up', 'animate-symbol');
-                        }, 300);
-                    }, 450);
+                        contactPopup.classList.add('show');
+                    }, 10);
+                    setTimeout(() => {
+                        this.classList.remove('bob-up');
+                    }, 300);
                 }, 300);
             } else {
                 this.classList.add('bob-right');
@@ -215,51 +221,112 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
+    socialIcons.forEach(icon => {
+        icon.addEventListener('click', function() {
+            const socialLink = this.nextElementSibling;
+            this.classList.add('animate-symbol');
+            setTimeout(() => {
+                window.open(socialLink.href, '_blank');
+                setTimeout(() => {
+                    this.classList.remove('animate-symbol');
+                }, 300);
+            }, 450);
+        });
+    });
+
     function closeContactPopup() {
         contactPopup.classList.remove('show');
         setTimeout(() => {
             contactPopup.style.display = 'none';
-            overlay.style.display = 'none';
+            if (!easterEggPopup.classList.contains('show')) {
+                overlay.style.display = 'none';
+            }
         }, 300);
     }
 
-    dismissBtn.addEventListener('click', closeContactPopup);
-    overlay.addEventListener('click', closeContactPopup);
-});
+    contactDismissBtn.addEventListener('click', closeContactPopup);
+    easterEggDismissBtn.addEventListener('click', closeEasterEggPopup);
 
-document.querySelector('.back-to-top').addEventListener('click', function(e) {
-    e.preventDefault();
-    const button = this;
-    button.classList.add('bob-up');
-    button.addEventListener('animationend', function() {
-        button.classList.remove('bob-up');
+    overlay.addEventListener('click', () => {
+        if (popup.style.display === 'block') {
+            closePopup();
+        }
+        if (contactPopup.classList.contains('show')) {
+            closeContactPopup();
+        }
+        if (easterEggPopup.classList.contains('show')) {
+            closeEasterEggPopup();
+        }
+        if (essayPopup.style.display === 'block') {
+            closeEssayPopup();
+        }
     });
 
-    setTimeout(() => {
-        const duration = 1000;
-        const start = window.scrollY;
-        const startTime = performance.now();
+    function showEasterEggPopup() {
+        confetti({
+            particleCount: 150,
+            spread: 180,
+            origin: { y: 0.6 }
+        });
+        easterEggPopup.style.display = 'block';
+        overlay.style.display = 'block';
+        setTimeout(() => {
+            easterEggPopup.classList.add('show');
+        }, 10);
+    }
 
-        function scroll(currentTime) {
-            const elapsed = currentTime - startTime;
-            const progress = Math.min(elapsed / duration, 1);
-            const easeOut = 1 - Math.pow(1 - progress, 3);
-            
-            window.scrollTo(0, start * (1 - easeOut));
-            if (progress < 1) {
-                requestAnimationFrame(scroll);
+    function closeEasterEggPopup() {
+        easterEggPopup.classList.remove('show');
+        setTimeout(() => {
+            easterEggPopup.style.display = 'none';
+            if (!contactPopup.classList.contains('show')) {
+                overlay.style.display = 'none';
             }
-        }
 
-        requestAnimationFrame(scroll);
-    }, 600);
-});
+            const bonusRotation = 555;
+            logo.style.setProperty('--current-rotation', `${currentRotation}deg`);
+            currentRotation += bonusRotation;
+            logo.style.setProperty('--target-rotation', `${currentRotation}deg`);
+            logo.classList.add('spin');
+            logo.addEventListener('animationend', function() {
+                logo.classList.remove('spin');
+                logo.style.transform = `rotate(${currentRotation}deg)`;
+            }, { once: true });
+        }, 300);
+    }
 
-document.addEventListener('DOMContentLoaded', function() {
+    document.querySelector('.back-to-top').addEventListener('click', function(e) {
+        e.preventDefault();
+        const button = this;
+        button.classList.add('bob-up');
+        button.addEventListener('animationend', function() {
+            button.classList.remove('bob-up');
+        });
+
+        setTimeout(() => {
+            const duration = 1000;
+            const start = window.scrollY;
+            const startTime = performance.now();
+
+            function scroll(currentTime) {
+                const elapsed = currentTime - startTime;
+                const progress = Math.min(elapsed / duration, 1);
+                const easeOut = 1 - Math.pow(1 - progress, 3);
+                
+                window.scrollTo(0, start * (1 - easeOut));
+                if (progress < 1) {
+                    requestAnimationFrame(scroll);
+                }
+            }
+
+            requestAnimationFrame(scroll);
+        }, 600);
+    });
+
     const essayPopup = document.querySelector('.essay-popup');
     const essayCloseBtn = document.querySelector('.essay-close-btn');
     const essayText = document.querySelector('.essay-text');
-    const overlay = document.querySelector('.overlay');
+    
     async function loadEssayContent() {
         try {
             const response = await fetch('essay.txt');
@@ -296,11 +363,6 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     
     essayCloseBtn.addEventListener('click', closeEssayPopup);
-    overlay.addEventListener('click', function(e) {
-        if (essayPopup.style.display === 'block') {
-            closeEssayPopup();
-        }
-    });
     
     document.addEventListener('keydown', function(e) {
         if (e.key === 'Escape' && essayPopup.classList.contains('show')) {

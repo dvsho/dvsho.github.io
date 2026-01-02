@@ -125,7 +125,7 @@ body {
     position: relative;
     color: #F0F0E0;
     text-decoration: none;
-    font-size: 1rem;
+    font-size: 1.2rem;
     margin-top: 5px;
     transition: color 0.3s ease;
 }
@@ -137,24 +137,6 @@ body {
 .nav-links a .symbol {
     display: inline-block;
     transition: opacity 0.3s ease;
-}
-
-.nav-links a .check {
-    position: absolute;
-    right: 0;
-    opacity: 0;
-    transition: opacity 0.3s ease;
-    font-family: 'SF Compact', sans-serif;
-}
-
-.nav-links a.bob-right.animate-symbol .symbol,
-.nav-links a.bob-up.animate-symbol .symbol {
-    opacity: 0;
-}
-
-.nav-links a.bob-right.animate-symbol .check,
-.nav-links a.bob-up.animate-symbol .check {
-    opacity: 1;
 }
 
 @keyframes bobRight {
@@ -174,7 +156,7 @@ body {
         transform: translateY(0);
     }
     50% {
-        transform: translateY(-5px);
+        transform: translateY(-7px);
     }
     100% {
         transform: translateY(0);
@@ -187,22 +169,6 @@ body {
 
 .nav-links a.bob-up {
     animation: bobUp 0.3s forwards;
-}
-
-.nav-links a.bob-down {
-    animation: bobDown 0.4s forwards;
-}
-
-@keyframes bobDown {
-    0% {
-        transform: translateY(0);
-    }
-    50% {
-        transform: translateY(5px);
-    }
-    100% {
-        transform: translateY(0);
-    }
 }
 
 .cover-wrapper {
@@ -805,7 +771,7 @@ footer {
 }
 
 .contact-popup .email-icon {
-    width: 200px;
+    width: 210px;
     height: 30px;
     background-color: #101830;
     border-radius: 6px;
@@ -846,6 +812,70 @@ footer {
 }
 
 .contact-popup .email-link {
+    color: #101830;
+    text-decoration: none;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+    user-select: text;
+    -webkit-user-select: text;
+    -moz-user-select: text;
+    -ms-user-select: text;
+}
+
+.contact-popup .social-container {
+    display: flex;
+    gap: 10px;
+    margin: 10px 0;
+}
+
+.contact-popup .social-item {
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+.contact-popup .social-icon {
+    width: 100px;
+    height: 30px;
+    background-color: #101830;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: left;
+    color: #F0F0E0;
+    font-size: 1rem;
+    font-family: 'H Regular', sans-serif;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+    position: relative;
+}
+
+.contact-popup .social-icon:hover {
+    transform: scale(1.05);
+}
+
+.contact-popup .social-icon .symbol {
+    display: inline-block;
+    transition: opacity 0.3s ease;
+    font-family: 'SF Compact', sans-serif;
+}
+
+.contact-popup .social-icon .check {
+    position: absolute;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    font-family: 'SF Compact', sans-serif;
+}
+
+.contact-popup .social-icon.animate-symbol .symbol {
+    opacity: 0;
+}
+
+.contact-popup .social-icon.animate-symbol .check {
+    opacity: 1;
+}
+
+.contact-popup .social-link {
     color: #101830;
     text-decoration: none;
     transition: opacity 0.3s ease;
