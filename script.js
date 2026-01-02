@@ -9,6 +9,7 @@ window.addEventListener('scroll', () => {
 });
 
 document.addEventListener('DOMContentLoaded', function () {
+    let scrollPosition = 0;
     const mobilePopup = document.querySelector('.mobile-popup');
     const dismissBtn = document.querySelector('.mobile-popup .dismiss-btn');
     const galleryObserver = new IntersectionObserver((entries) => {
@@ -184,6 +185,11 @@ document.addEventListener('DOMContentLoaded', function () {
             if (this.classList.contains('contact-link')) {
                 this.classList.add('bob-up');
                 setTimeout(() => {
+                    if (!document.body.classList.contains('popup-active')) {
+                        scrollPosition = window.pageYOffset;
+                        document.body.style.top = `-${scrollPosition}px`;
+                        document.body.classList.add('popup-active');
+                    }
                     contactPopup.style.display = 'block';
                     overlay.style.display = 'block';
                     setTimeout(() => {
@@ -240,6 +246,11 @@ document.addEventListener('DOMContentLoaded', function () {
             contactPopup.style.display = 'none';
             if (!easterEggPopup.classList.contains('show')) {
                 overlay.style.display = 'none';
+                if (document.body.classList.contains('popup-active') && !essayPopup.classList.contains('show')) {
+                    document.body.classList.remove('popup-active');
+                    document.body.style.top = '';
+                    window.scrollTo(0, scrollPosition);
+                }
             }
         }, 300);
     }
@@ -268,6 +279,11 @@ document.addEventListener('DOMContentLoaded', function () {
             spread: 180,
             origin: { y: 0.6 }
         });
+        if (!document.body.classList.contains('popup-active')) {
+            scrollPosition = window.pageYOffset;
+            document.body.style.top = `-${scrollPosition}px`;
+            document.body.classList.add('popup-active');
+        }
         easterEggPopup.style.display = 'block';
         overlay.style.display = 'block';
         setTimeout(() => {
@@ -281,6 +297,11 @@ document.addEventListener('DOMContentLoaded', function () {
             easterEggPopup.style.display = 'none';
             if (!contactPopup.classList.contains('show')) {
                 overlay.style.display = 'none';
+                if (document.body.classList.contains('popup-active') && !essayPopup.classList.contains('show')) {
+                    document.body.classList.remove('popup-active');
+                    document.body.style.top = '';
+                    window.scrollTo(0, scrollPosition);
+                }
             }
 
             const bonusRotation = 555;
@@ -338,7 +359,6 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }
     
-    let scrollPosition = 0;
     function showEssayPopup() {
         loadEssayContent();
         scrollPosition = window.pageYOffset;
@@ -355,10 +375,12 @@ document.addEventListener('DOMContentLoaded', function () {
         essayPopup.classList.remove('show');
         setTimeout(() => {
             essayPopup.style.display = 'none';
-            overlay.style.display = 'none';
-            document.body.classList.remove('popup-active');
-            document.body.style.top = '';
-            window.scrollTo(0, scrollPosition);
+            if (!contactPopup.classList.contains('show') && !easterEggPopup.classList.contains('show')) {
+                overlay.style.display = 'none';
+                document.body.classList.remove('popup-active');
+                document.body.style.top = '';
+                window.scrollTo(0, scrollPosition);
+            }
         }, 300);
     }
     
