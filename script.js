@@ -1,14 +1,82 @@
 const coverWrapper = document.querySelector('.cover-wrapper');
 window.addEventListener('scroll', () => {
+    if (document.body.classList.contains('popup-active')) return;
     const scrollTop = window.scrollY;
     const maxBorderWidth = 20;
     const borderWidth = Math.min(scrollTop, maxBorderWidth);
-
     coverWrapper.style.borderWidth = `${borderWidth}px`;
     coverWrapper.style.borderColor = '#F0F0E0';
 });
 
 document.addEventListener('DOMContentLoaded', function () {
+    window.scrollTo(0, 0);
+    if ('scrollRestoration' in history) {
+        history.scrollRestoration = 'manual';
+    }
+    const enterBtn = document.querySelector('.enter-btn');
+    const welcomeText = document.querySelector('.welcome-text');
+    const welcomeMessages = [
+        "You're looking good today.",
+        "You're looking good today.",
+        "You're looking good today.",
+        "You're looking good today.",
+        "You're looking good today.",
+        "You're looking good today.",
+        "You're looking good today.",
+        "You're looking good today.",
+        "You're looking good today.",
+        "Look behind you."
+    ];
+
+    if (enterBtn) {
+        enterBtn.addEventListener('click', () => {
+            enterBtn.style.opacity = '0';
+            setTimeout(() => {
+                enterBtn.style.display = 'none';
+            }, 500);
+
+            if (welcomeText) {
+                const randomMessage = welcomeMessages[Math.floor(Math.random() * welcomeMessages.length)];
+                welcomeText.textContent = randomMessage;
+                
+                setTimeout(() => {
+                    welcomeText.style.opacity = '1';
+                    setTimeout(() => {
+                        welcomeText.style.opacity = '0';
+                        setTimeout(() => {
+                            startScroll();
+                        }, 670);
+                    }, 1000);
+                }, 330);
+            } else {
+                startScroll();
+            }
+        });
+    }
+
+    function startScroll() {
+        document.documentElement.classList.remove('no-scroll');
+        const description = document.querySelector('.description');
+        if (description) {
+            const targetPosition = (description.getBoundingClientRect().bottom + window.scrollY) - window.innerHeight;
+            const startPosition = window.scrollY;
+            const distance = targetPosition - startPosition;
+            const duration = 1800;
+            let startTime = null;
+            function animation(currentTime) {
+                if (startTime === null) startTime = currentTime;
+                const timeElapsed = currentTime - startTime;
+                const progress = Math.min(timeElapsed / duration, 1);
+                const ease = 1 - Math.pow(1 - progress, 3);
+                window.scrollTo(0, startPosition + (distance * ease));
+                if (timeElapsed < duration) {
+                    requestAnimationFrame(animation);
+                }
+            }
+            requestAnimationFrame(animation);
+        }
+    }
+
     let scrollPosition = 0;
     const mobilePopup = document.querySelector('.mobile-popup');
     const dismissBtn = document.querySelector('.mobile-popup .dismiss-btn');
@@ -96,6 +164,11 @@ document.addEventListener('DOMContentLoaded', function () {
         popupImg.src = imgSrc;
         popupImg.alt = "Popup Image";
         popupImg.onload = () => {
+            if (!document.body.classList.contains('popup-active')) {
+                scrollPosition = window.pageYOffset;
+                document.body.style.top = `-${scrollPosition}px`;
+                document.body.classList.add('popup-active');
+            }
             popup.innerHTML = `
                 <div class="popup-card">
                     <img src="${imgSrc}" alt="Popup Image">
@@ -134,6 +207,11 @@ document.addEventListener('DOMContentLoaded', function () {
         popup.style.display = 'none';
         overlay.style.display = 'none';
         currentImageIndex = -1;
+        if (document.body.classList.contains('popup-active')) {
+            document.body.classList.remove('popup-active');
+            document.body.style.top = '';
+            window.scrollTo(0, scrollPosition);
+        }
     }
 
     document.addEventListener('keydown', function(e) {
