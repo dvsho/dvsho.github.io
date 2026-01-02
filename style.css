@@ -733,6 +733,14 @@ footer {
     transform: scale(1.1);
 }
 
+.contact-popup p:first-of-type {
+    font-size: 1.5rem;
+    font-family: 'H Medium', sans-serif;
+    margin-bottom: 25px;
+    text-indent: -1.5em;
+    padding-left: 1.5em;
+}
+
 @media (max-width: 600px) {
     .contact-popup {
         padding: 5px 20px 65px 20px;
@@ -747,16 +755,8 @@ footer {
     }
     
     .contact-popup p:first-of-type {
-        font-size: 1.2rem;
+        font-size: 1.3rem;
     }
-}
-
-.contact-popup p:first-of-type {
-    font-size: 1.5rem;
-    font-family: 'H Medium', sans-serif;
-    margin-bottom: 25px;
-    text-indent: -1.5em;
-    padding-left: 1.5em;
 }
 
 .contact-popup p {
