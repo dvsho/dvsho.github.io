@@ -237,17 +237,25 @@ body {
 
 @media (max-width: 600px) {
     .enter-btn {
-        bottom: 15%;
+        bottom: 5%;
         right: 50%;
         transform: translateX(50%);
     }
 
     .welcome-text {
-        bottom: 3%;
+        bottom: 5%;
         right: 50%;
         transform: translateX(50%);
         text-align: center;
         width: 100%;
+    }
+
+    body.is-safari .enter-btn {
+        bottom: 15%;
+    }
+
+    body.is-safari .welcome-text {
+        bottom: 3%;
     }
 }
 

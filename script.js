@@ -13,6 +13,18 @@ document.addEventListener('DOMContentLoaded', function () {
     if ('scrollRestoration' in history) {
         history.scrollRestoration = 'manual';
     }
+
+    const ua = navigator.userAgent;
+    const isSafari = ua.includes('Safari') && 
+                     !ua.includes('Chrome') && 
+                     !ua.includes('CriOS') && 
+                     !ua.includes('FxiOS') && 
+                     !ua.includes('Instagram');
+    
+    if (isSafari) {
+        document.body.classList.add('is-safari');
+    }
+
     const enterBtn = document.querySelector('.enter-btn');
     const welcomeText = document.querySelector('.welcome-text');
     const welcomeMessages = [
