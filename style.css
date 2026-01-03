@@ -26,8 +26,8 @@
 }
 
 @font-face {
-    font-family: 'SF Compact';
-    src: url('https://a.dvsho.com/fonts/SF-Compact.ttf') format('truetype');
+    font-family: 'SF Pro';
+    src: url('https://a.dvsho.com/fonts/SF-Pro.ttf') format('truetype');
     font-style: normal;
 }
 
@@ -650,7 +650,7 @@ footer {
     font-size: 1rem;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
     transition: transform 0.2s ease;
-    font-family: 'SF Compact', sans-serif;
+    font-family: 'SF Pro', sans-serif;
 }
 
 @media (hover: hover) {
@@ -785,7 +785,7 @@ footer {
 }
 
 .contact-popup .email-icon {
-    width: 210px;
+    width: 220px;
     height: 30px;
     background-color: #101830;
     border-radius: 6px;
@@ -810,7 +810,7 @@ footer {
     display: inline-block;
     transition: opacity 0.3s ease;
     will-change: opacity;
-    font-family: 'SF Compact', sans-serif;
+    font-family: 'SF Pro', sans-serif;
 }
 
 .contact-popup .email-icon .check {
@@ -818,7 +818,7 @@ footer {
     opacity: 0;
     transition: opacity 0.3s ease;
     will-change: opacity;
-    font-family: 'SF Compact', sans-serif;
+    font-family: 'SF Pro', sans-serif;
 }
 
 .contact-popup .email-icon.animate-symbol .symbol {
@@ -853,7 +853,7 @@ footer {
 }
 
 .contact-popup .social-icon {
-    width: 100px;
+    width: 105px;
     height: 30px;
     background-color: #101830;
     border-radius: 6px;
@@ -878,7 +878,7 @@ footer {
     display: inline-block;
     transition: opacity 0.3s ease;
     will-change: opacity;
-    font-family: 'SF Compact', sans-serif;
+    font-family: 'SF Pro', sans-serif;
 }
 
 .contact-popup .social-icon .check {
@@ -886,7 +886,7 @@ footer {
     opacity: 0;
     transition: opacity 0.3s ease;
     will-change: opacity;
-    font-family: 'SF Compact', sans-serif;
+    font-family: 'SF Pro', sans-serif;
 }
 
 .contact-popup .social-icon.animate-symbol .symbol {
@@ -963,8 +963,8 @@ footer {
     padding: 25px 10px 20px 0px;
     overflow-y: auto;
     color: #101830;
-    font-family: 'H Regular', sans-serif;
-    font-size: 1.05rem;
+    font-family: 'SF Pro', sans-serif;
+    font-size: 1.01rem;
     line-height: 1.6;
     text-align: left;
     white-space: pre-wrap;
@@ -977,6 +977,7 @@ footer {
 
 .essay-text::first-line {
     font-family: 'H Semibold', sans-serif;
+    font-size: 1.1rem;
 }
 
 .essay-text::-webkit-scrollbar {
