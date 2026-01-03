@@ -237,12 +237,14 @@ body {
 
 @media (max-width: 600px) {
     .enter-btn {
+        font-size: 1.1rem;
         bottom: 5%;
         right: 50%;
         transform: translateX(50%);
     }
 
     .welcome-text {
+        font-size: 1.1rem;
         bottom: 5%;
         right: 50%;
         transform: translateX(50%);
@@ -737,6 +739,7 @@ footer {
 
 .contact-popup p {
     margin: 20px 0 10px 0;
+    font-size: 1.05rem;
 }
 
 .contact-popup p:first-of-type {
@@ -761,11 +764,13 @@ footer {
     }
     
     .contact-popup p:first-of-type {
-        font-size: 1.3rem;
+        font-size: 1.25rem;
+        font-family: 'H Semibold', sans-serif;
     }
 
     .contact-popup p {
         font-size: 0.85rem;
+        font-family: 'H Medium', sans-serif;
     }
 }
 
