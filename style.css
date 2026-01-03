@@ -114,7 +114,9 @@ body {
     right: 40px;
     z-index: 1000;
     color: #F0F0E0;
-    text-align: right;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     user-select: none;
     -webkit-user-select: none;
     -moz-user-select: none;
@@ -127,7 +129,7 @@ body {
     color: #F0F0E0;
     text-decoration: none;
     font-size: 1.2rem;
-    margin-top: 5px;
+    margin-top: 6px;
     transition: color 0.3s ease;
     will-change: transform;
 }

@@ -31,7 +31,6 @@ document.addEventListener('DOMContentLoaded', function () {
                      !ua.includes('CriOS') && 
                      !ua.includes('FxiOS') && 
                      !ua.includes('Instagram');
-    
     if (isSafari) {
         document.body.classList.add('is-safari');
     }
@@ -162,7 +161,6 @@ document.addEventListener('DOMContentLoaded', function () {
     overlay.classList.add('overlay');
     document.body.appendChild(popup);
     document.body.appendChild(overlay);
-
     let currentImageIndex = -1;
 
     function showImage(index) {
@@ -194,7 +192,6 @@ document.addEventListener('DOMContentLoaded', function () {
             popup.style.display = 'block';
             overlay.style.display = 'block';
             currentImageIndex = index;
-
             popup.querySelector('.close-btn').addEventListener('click', closePopup);
             popup.querySelector('.prev-btn').addEventListener('click', () => showImage(currentImageIndex - 1));
             popup.querySelector('.next-btn').addEventListener('click', () => showImage(currentImageIndex + 1));
@@ -273,6 +270,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     navLinks.forEach(link => {
         link.addEventListener('click', function(e) {
+            if (this.classList.contains('turnip-link')) return;
             e.preventDefault();
             if (this.classList.contains('contact-link')) {
                 this.classList.add('bob-up');
