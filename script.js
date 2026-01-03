@@ -1,19 +1,30 @@
 const coverWrapper = document.querySelector('.cover-wrapper');
+coverWrapper.style.borderColor = '#F0F0E0';
+let ticking = false;
+let lastBorderWidth = -1;
+
 window.addEventListener('scroll', () => {
     if (document.body.classList.contains('popup-active')) return;
-    const scrollTop = window.scrollY;
-    const maxBorderWidth = 20;
-    const borderWidth = Math.min(scrollTop, maxBorderWidth);
-    coverWrapper.style.borderWidth = `${borderWidth}px`;
-    coverWrapper.style.borderColor = '#F0F0E0';
-});
+    if (!ticking) {
+        window.requestAnimationFrame(() => {
+            const scrollTop = window.scrollY;
+            const maxBorderWidth = 20;
+            const borderWidth = Math.min(scrollTop, maxBorderWidth);
+            if (borderWidth !== lastBorderWidth) {
+                coverWrapper.style.borderWidth = `${borderWidth}px`;
+                lastBorderWidth = borderWidth;
+            }
+            ticking = false;
+        });
+        ticking = true;
+    }
+}, { passive: true });
 
 document.addEventListener('DOMContentLoaded', function () {
     window.scrollTo(0, 0);
     if ('scrollRestoration' in history) {
         history.scrollRestoration = 'manual';
     }
-
     const ua = navigator.userAgent;
     const isSafari = ua.includes('Safari') && 
                      !ua.includes('Chrome') && 
@@ -24,33 +35,20 @@ document.addEventListener('DOMContentLoaded', function () {
     if (isSafari) {
         document.body.classList.add('is-safari');
     }
-
     const enterBtn = document.querySelector('.enter-btn');
     const welcomeText = document.querySelector('.welcome-text');
     const welcomeMessages = [
-        "You're looking good today.",
-        "You're looking good today.",
-        "You're looking good today.",
-        "You're looking good today.",
-        "You're looking good today.",
-        "You're looking good today.",
-        "You're looking good today.",
-        "You're looking good today.",
-        "You're looking good today.",
-        "Look behind you."
+        "You're looking good today."
     ];
-
     if (enterBtn) {
         enterBtn.addEventListener('click', () => {
             enterBtn.style.opacity = '0';
             setTimeout(() => {
                 enterBtn.style.display = 'none';
             }, 500);
-
             if (welcomeText) {
                 const randomMessage = welcomeMessages[Math.floor(Math.random() * welcomeMessages.length)];
                 welcomeText.textContent = randomMessage;
-                
                 setTimeout(() => {
                     welcomeText.style.opacity = '1';
                     setTimeout(() => {
@@ -111,12 +109,18 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     dismissBtn.addEventListener('click', () => {
-        mobilePopup.classList.add('slide-out');
-        setTimeout(() => {
-            mobilePopup.style.display = 'none';
-            mobilePopup.classList.remove('slide-out');
-        }, 300);
+        closeMobilePopup();
     });
+
+    function closeMobilePopup() {
+        if (mobilePopup.style.display !== 'none') {
+            mobilePopup.classList.add('slide-out');
+            setTimeout(() => {
+                mobilePopup.style.display = 'none';
+                mobilePopup.classList.remove('slide-out');
+            }, 300);
+        }
+    }
 
     const coverImage = document.querySelector('.cover-image img');
     if (coverImage) {
@@ -134,24 +138,21 @@ document.addEventListener('DOMContentLoaded', function () {
                 const imgElement = document.createElement('img');
                 imgElement.src = imageDiv.getAttribute('data-src');
                 imgElement.alt = imageDiv.getAttribute('data-alt');
-                imgElement.style.opacity = '0';
-                imgElement.style.transition = 'opacity 0.3s ease-in-out';
                 imgElement.onload = () => {
-                    imgElement.style.opacity = '1';
                     imgElement.classList.add('loaded');
                     imageDiv.classList.add('loaded');
                 };
                 imageDiv.prepend(imgElement);
-                imageDiv.classList.remove('image');
                 observer.unobserve(imageDiv);
             }
         });
     }, {
-        rootMargin: '50px 0px',
+        rootMargin: '200px 0px',
         threshold: 0.1
     });
 
-    document.querySelectorAll('.image').forEach(imageDiv => {
+    const allImages = Array.from(document.querySelectorAll('.image'));
+    allImages.forEach(imageDiv => {
         imageObserver.observe(imageDiv);
     });
 
@@ -163,12 +164,10 @@ document.addEventListener('DOMContentLoaded', function () {
     document.body.appendChild(overlay);
 
     let currentImageIndex = -1;
-    const allImages = Array.from(document.querySelectorAll('.image'));
 
     function showImage(index) {
         if (index < 0) index = allImages.length - 1;
         if (index >= allImages.length) index = 0;
-        
         const imageDiv = allImages[index];
         const imgSrc = imageDiv.getAttribute('data-src');
         const captionText = imageDiv.querySelector('.caption').innerHTML;
@@ -202,17 +201,17 @@ document.addEventListener('DOMContentLoaded', function () {
         };
     }
 
-    document.querySelectorAll('.image').forEach((imageDiv, index) => {
-        imageDiv.addEventListener('click', function () {
-            showImage(index);
-            if (window.innerWidth <= 600) {
-                mobilePopup.classList.add('slide-out');
-                setTimeout(() => {
-                    mobilePopup.style.display = 'none';
-                    mobilePopup.classList.remove('slide-out');
-                }, 300);
+    document.body.addEventListener('click', function(e) {
+        const imageDiv = e.target.closest('.image');
+        if (imageDiv) {
+            const index = allImages.indexOf(imageDiv);
+            if (index !== -1) {
+                showImage(index);
+                if (window.innerWidth <= 600) {
+                    closeMobilePopup();
+                }
             }
-        });
+        }
     });
 
     function closePopup() {
@@ -267,7 +266,6 @@ document.addEventListener('DOMContentLoaded', function () {
     const navLinks = document.querySelectorAll('.nav-links a');
     const contactPopup = document.querySelector('.contact-popup:not(.easter-egg-popup)');
     const easterEggPopup = document.querySelector('.easter-egg-popup');
-    const contactLink = document.querySelector('.contact-link');
     const contactDismissBtn = contactPopup.querySelector('.dismiss-btn');
     const easterEggDismissBtn = easterEggPopup.querySelector('.dismiss-btn');
     const emailIcons = contactPopup.querySelectorAll('.email-icon');
@@ -286,12 +284,12 @@ document.addEventListener('DOMContentLoaded', function () {
                         }, 300);
                         contactPopup.dataset.triggeringPopup = 'easterEgg';
                     }
-
                     if (!document.body.classList.contains('popup-active')) {
                         scrollPosition = window.pageYOffset;
                         document.body.style.top = `-${scrollPosition}px`;
                         document.body.classList.add('popup-active');
                     }
+                    closeMobilePopup();
                     contactPopup.style.display = 'block';
                     overlay.style.display = 'block';
                     setTimeout(() => {
@@ -320,12 +318,13 @@ document.addEventListener('DOMContentLoaded', function () {
         icon.addEventListener('click', function() {
             const emailLink = this.nextElementSibling;
             this.classList.add('animate-symbol');
+            const isMobile = window.innerWidth <= 600;
             setTimeout(() => {
                 window.location.href = emailLink.href;
                 setTimeout(() => {
                     this.classList.remove('animate-symbol');
-                }, 300);
-            }, 450);
+                }, isMobile ? 1000 : 300);
+            }, isMobile ? 800 : 450);
         });
     });
 
@@ -333,12 +332,13 @@ document.addEventListener('DOMContentLoaded', function () {
         icon.addEventListener('click', function() {
             const socialLink = this.nextElementSibling;
             this.classList.add('animate-symbol');
+            const isMobile = window.innerWidth <= 600;
             setTimeout(() => {
                 window.open(socialLink.href, '_blank');
                 setTimeout(() => {
                     this.classList.remove('animate-symbol');
-                }, 300);
-            }, 450);
+                }, isMobile ? 1000 : 300);
+            }, isMobile ? 800 : 450);
         });
     });
 
@@ -346,7 +346,6 @@ document.addEventListener('DOMContentLoaded', function () {
         contactPopup.classList.remove('show');
         setTimeout(() => {
             contactPopup.style.display = 'none';
-
             if (contactPopup.dataset.triggeringPopup === 'easterEgg') {
                 delete contactPopup.dataset.triggeringPopup;
                 easterEggPopup.style.display = 'block';
@@ -355,7 +354,6 @@ document.addEventListener('DOMContentLoaded', function () {
                 }, 10);
                 return;
             }
-
             if (!easterEggPopup.classList.contains('show')) {
                 overlay.style.display = 'none';
                 if (document.body.classList.contains('popup-active') && !essayPopup.classList.contains('show')) {
@@ -391,7 +389,6 @@ document.addEventListener('DOMContentLoaded', function () {
             spread: 180,
             origin: { y: 0.6 }
         });
-
         if (contactPopup.classList.contains('show')) {
             contactPopup.classList.remove('show');
             setTimeout(() => {
@@ -405,6 +402,7 @@ document.addEventListener('DOMContentLoaded', function () {
             document.body.style.top = `-${scrollPosition}px`;
             document.body.classList.add('popup-active');
         }
+        closeMobilePopup();
         easterEggPopup.style.display = 'block';
         overlay.style.display = 'block';
         setTimeout(() => {
@@ -416,7 +414,6 @@ document.addEventListener('DOMContentLoaded', function () {
         easterEggPopup.classList.remove('show');
         setTimeout(() => {
             easterEggPopup.style.display = 'none';
-
             let restoring = false;
             if (easterEggPopup.dataset.triggeringPopup === 'contact') {
                 delete easterEggPopup.dataset.triggeringPopup;
@@ -426,7 +423,6 @@ document.addEventListener('DOMContentLoaded', function () {
                 }, 10);
                 restoring = true;
             }
-
             if (!restoring && !contactPopup.classList.contains('show')) {
                 overlay.style.display = 'none';
                 if (document.body.classList.contains('popup-active') && !essayPopup.classList.contains('show')) {
@@ -435,7 +431,6 @@ document.addEventListener('DOMContentLoaded', function () {
                     window.scrollTo(0, scrollPosition);
                 }
             }
-
             const bonusRotation = 555;
             logo.style.setProperty('--current-rotation', `${currentRotation}deg`);
             currentRotation += bonusRotation;
@@ -455,25 +450,22 @@ document.addEventListener('DOMContentLoaded', function () {
         button.addEventListener('animationend', function() {
             button.classList.remove('bob-up');
         });
-
+        const isMobile = window.innerWidth <= 600;
         setTimeout(() => {
             const duration = 1000;
             const start = window.scrollY;
             const startTime = performance.now();
-
             function scroll(currentTime) {
                 const elapsed = currentTime - startTime;
                 const progress = Math.min(elapsed / duration, 1);
                 const easeOut = 1 - Math.pow(1 - progress, 3);
-                
                 window.scrollTo(0, start * (1 - easeOut));
                 if (progress < 1) {
                     requestAnimationFrame(scroll);
                 }
             }
-
             requestAnimationFrame(scroll);
-        }, 600);
+        }, isMobile ? 1000 : 600);
     });
 
     const essayPopup = document.querySelector('.essay-popup');
@@ -493,6 +485,7 @@ document.addEventListener('DOMContentLoaded', function () {
     
     function showEssayPopup() {
         loadEssayContent();
+        closeMobilePopup();
         scrollPosition = window.pageYOffset;
         document.body.style.top = `-${scrollPosition}px`;
         document.body.classList.add('popup-active');
@@ -517,7 +510,6 @@ document.addEventListener('DOMContentLoaded', function () {
     }
     
     essayCloseBtn.addEventListener('click', closeEssayPopup);
-    
     document.addEventListener('keydown', function(e) {
         if (e.key === 'Escape' && essayPopup.classList.contains('show')) {
             closeEssayPopup();

@@ -129,6 +129,7 @@ body {
     font-size: 1.2rem;
     margin-top: 5px;
     transition: color 0.3s ease;
+    will-change: transform;
 }
 
 @media (hover: hover) {
@@ -176,7 +177,7 @@ body {
 
 .welcome-text {
     position: absolute;
-    bottom: 40px;
+    bottom: 46px;
     right: 40px;
     font-family: 'H Medium', sans-serif;
     font-size: 1.2rem;
@@ -570,6 +571,7 @@ footer {
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
+    will-change: transform;
 }
 
 @media (hover: hover) {
@@ -807,6 +809,7 @@ footer {
 .contact-popup .email-icon .symbol {
     display: inline-block;
     transition: opacity 0.3s ease;
+    will-change: opacity;
     font-family: 'SF Compact', sans-serif;
 }
 
@@ -814,6 +817,7 @@ footer {
     position: absolute;
     opacity: 0;
     transition: opacity 0.3s ease;
+    will-change: opacity;
     font-family: 'SF Compact', sans-serif;
 }
 
@@ -873,6 +877,7 @@ footer {
 .contact-popup .social-icon .symbol {
     display: inline-block;
     transition: opacity 0.3s ease;
+    will-change: opacity;
     font-family: 'SF Compact', sans-serif;
 }
 
@@ -880,6 +885,7 @@ footer {
     position: absolute;
     opacity: 0;
     transition: opacity 0.3s ease;
+    will-change: opacity;
     font-family: 'SF Compact', sans-serif;
 }
 
