@@ -270,45 +270,32 @@ document.addEventListener('DOMContentLoaded', function () {
 
     navLinks.forEach(link => {
         link.addEventListener('click', function(e) {
-            if (this.classList.contains('turnip-link')) return;
+            if (!this.classList.contains('contact-link')) return;
             e.preventDefault();
-            if (this.classList.contains('contact-link')) {
-                this.classList.add('bob-up');
-                setTimeout(() => {
-                    if (easterEggPopup.classList.contains('show')) {
-                        easterEggPopup.classList.remove('show');
-                        setTimeout(() => {
-                            easterEggPopup.style.display = 'none';
-                        }, 300);
-                        contactPopup.dataset.triggeringPopup = 'easterEgg';
-                    }
-                    if (!document.body.classList.contains('popup-active')) {
-                        scrollPosition = window.pageYOffset;
-                        document.body.style.top = `-${scrollPosition}px`;
-                        document.body.classList.add('popup-active');
-                    }
-                    closeMobilePopup();
-                    contactPopup.style.display = 'block';
-                    overlay.style.display = 'block';
+            this.classList.add('bob-up');
+            setTimeout(() => {
+                if (easterEggPopup.classList.contains('show')) {
+                    easterEggPopup.classList.remove('show');
                     setTimeout(() => {
-                        contactPopup.classList.add('show');
-                    }, 10);
-                    setTimeout(() => {
-                        this.classList.remove('bob-up');
+                        easterEggPopup.style.display = 'none';
                     }, 300);
-                }, 300);
-            } else {
-                this.classList.add('bob-right');
+                    contactPopup.dataset.triggeringPopup = 'easterEgg';
+                }
+                if (!document.body.classList.contains('popup-active')) {
+                    scrollPosition = window.pageYOffset;
+                    document.body.style.top = `-${scrollPosition}px`;
+                    document.body.classList.add('popup-active');
+                }
+                closeMobilePopup();
+                contactPopup.style.display = 'block';
+                overlay.style.display = 'block';
                 setTimeout(() => {
-                    this.classList.add('animate-symbol');
-                    setTimeout(() => {
-                        window.open(this.href, '_blank');
-                        setTimeout(() => {
-                            this.classList.remove('bob-right', 'animate-symbol');
-                        }, 300);
-                    }, 450);
+                    contactPopup.classList.add('show');
+                }, 10);
+                setTimeout(() => {
+                    this.classList.remove('bob-up');
                 }, 300);
-            }
+            }, 300);
         });
     });
 
@@ -515,4 +502,48 @@ document.addEventListener('DOMContentLoaded', function () {
     });
     
     window.showEssayPopup = showEssayPopup;
+
+    const amilaneLink = document.querySelector('.amilane-link');
+    const amilaneOverlay = document.querySelector('.amilane-overlay');
+    const amilaneCloseBtn = document.querySelector('.amilane-close-btn');
+
+    if (amilaneLink && amilaneOverlay && amilaneCloseBtn) {
+        amilaneLink.addEventListener('click', function(e) {
+            e.preventDefault();
+            closeMobilePopup();
+            if (contactPopup.classList.contains('show')) {
+                 closeContactPopup();
+            }
+            if (!document.body.classList.contains('popup-active')) {
+                scrollPosition = window.pageYOffset;
+                document.body.style.top = `-${scrollPosition}px`;
+                document.body.classList.add('popup-active');
+            }
+            amilaneOverlay.style.display = 'flex';
+            amilaneOverlay.offsetHeight; 
+            amilaneOverlay.classList.add('show');
+        });
+
+        amilaneCloseBtn.addEventListener('click', closeAmilaneOverlay);
+        function closeAmilaneOverlay() {
+            amilaneOverlay.classList.remove('show');
+            setTimeout(() => {
+                amilaneOverlay.style.display = 'none';
+                if (!contactPopup.classList.contains('show') && 
+                    !easterEggPopup.classList.contains('show') && 
+                    !essayPopup.classList.contains('show') &&
+                    (!popup || popup.style.display !== 'block')) {
+                    document.body.classList.remove('popup-active');
+                    document.body.style.top = '';
+                    window.scrollTo(0, scrollPosition);
+                }
+            }, 500);
+        }
+
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && amilaneOverlay.classList.contains('show')) {
+                closeAmilaneOverlay();
+            }
+        });
+    }
 });
