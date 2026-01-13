@@ -124,7 +124,9 @@ body {
 }
 
 .nav-links a {
-    display: block;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     position: relative;
     color: #F0F0E0;
     text-decoration: none;
@@ -132,6 +134,27 @@ body {
     margin-top: 5px;
     transition: color 0.3s ease;
     will-change: transform;
+}
+
+.contact-label {
+    position: absolute;
+    right: 100%;
+    top: 50%;
+    transform: translateY(-60%);
+    font-family: 'H Medium', sans-serif;
+    font-size: 1.1rem;
+    color: #F0F0E0;
+    white-space: nowrap;
+    margin-right: 10px;
+    pointer-events: none;
+    opacity: 1;
+    animation: fadeOutLabel 0.8s ease 2s forwards;
+}
+
+@keyframes fadeOutLabel {
+    to {
+        opacity: 0;
+    }
 }
 
 @media (hover: hover) {

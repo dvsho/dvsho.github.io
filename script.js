@@ -36,9 +36,6 @@ document.addEventListener('DOMContentLoaded', function () {
     }
     const enterBtn = document.querySelector('.enter-btn');
     const welcomeText = document.querySelector('.welcome-text');
-    const welcomeMessages = [
-        "You're looking good today."
-    ];
     if (enterBtn) {
         enterBtn.addEventListener('click', () => {
             enterBtn.style.opacity = '0';
@@ -46,16 +43,23 @@ document.addEventListener('DOMContentLoaded', function () {
                 enterBtn.style.display = 'none';
             }, 500);
             if (welcomeText) {
-                const randomMessage = welcomeMessages[Math.floor(Math.random() * welcomeMessages.length)];
-                welcomeText.textContent = randomMessage;
+                welcomeText.textContent = "Loading...";
                 setTimeout(() => {
                     welcomeText.style.opacity = '1';
+                    const loadingDuration = 1000 + Math.random() * 1500;
                     setTimeout(() => {
                         welcomeText.style.opacity = '0';
                         setTimeout(() => {
-                            startScroll();
+                            welcomeText.textContent = "Ready";
+                            welcomeText.style.opacity = '1';
+                            setTimeout(() => {
+                                welcomeText.style.opacity = '0';
+                                setTimeout(() => {
+                                    startScroll();
+                                }, 670);
+                            }, 1000);
                         }, 670);
-                    }, 1000);
+                    }, loadingDuration);
                 }, 330);
             } else {
                 startScroll();
@@ -151,7 +155,21 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
     const allImages = Array.from(document.querySelectorAll('.image'));
-    allImages.forEach(imageDiv => {
+    const eagerImages = allImages.slice(0, 10);
+    const lazyImages = allImages.slice(10);
+
+    eagerImages.forEach(imageDiv => {
+        const imgElement = document.createElement('img');
+        imgElement.src = imageDiv.getAttribute('data-src');
+        imgElement.alt = imageDiv.getAttribute('data-alt');
+        imgElement.onload = () => {
+            imgElement.classList.add('loaded');
+            imageDiv.classList.add('loaded');
+        };
+        imageDiv.prepend(imgElement);
+    });
+
+    lazyImages.forEach(imageDiv => {
         imageObserver.observe(imageDiv);
     });
 
