@@ -257,6 +257,7 @@ document.addEventListener('DOMContentLoaded', function () {
     let currentRotation = 0;
     let logoClickCount = 0;
     let easterEggFound = false;
+    let easterEggPopup = null;
 
     logo.addEventListener('click', function() {
         const randomRotation = 30 + Math.random() * 300;
@@ -280,9 +281,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     const navLinks = document.querySelectorAll('.nav-links a');
     const contactPopup = document.querySelector('.contact-popup:not(.easter-egg-popup)');
-    const easterEggPopup = document.querySelector('.easter-egg-popup');
     const contactDismissBtn = contactPopup.querySelector('.dismiss-btn');
-    const easterEggDismissBtn = easterEggPopup.querySelector('.dismiss-btn');
     const emailIcons = contactPopup.querySelectorAll('.email-icon');
     const socialIcons = contactPopup.querySelectorAll('.social-icon');
 
@@ -292,7 +291,7 @@ document.addEventListener('DOMContentLoaded', function () {
             e.preventDefault();
             this.classList.add('bob-up');
             setTimeout(() => {
-                if (easterEggPopup.classList.contains('show')) {
+                if (easterEggPopup && easterEggPopup.classList.contains('show')) {
                     easterEggPopup.classList.remove('show');
                     setTimeout(() => {
                         easterEggPopup.style.display = 'none';
@@ -349,7 +348,7 @@ document.addEventListener('DOMContentLoaded', function () {
         contactPopup.classList.remove('show');
         setTimeout(() => {
             contactPopup.style.display = 'none';
-            if (contactPopup.dataset.triggeringPopup === 'easterEgg') {
+            if (contactPopup.dataset.triggeringPopup === 'easterEgg' && easterEggPopup) {
                 delete contactPopup.dataset.triggeringPopup;
                 easterEggPopup.style.display = 'block';
                 setTimeout(() => {
@@ -357,7 +356,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 }, 10);
                 return;
             }
-            if (!easterEggPopup.classList.contains('show')) {
+            if (!easterEggPopup || !easterEggPopup.classList.contains('show')) {
                 overlay.style.display = 'none';
                 if (document.body.classList.contains('popup-active') && !essayPopup.classList.contains('show')) {
                     document.body.classList.remove('popup-active');
@@ -369,7 +368,6 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     contactDismissBtn.addEventListener('click', closeContactPopup);
-    easterEggDismissBtn.addEventListener('click', closeEasterEggPopup);
 
     overlay.addEventListener('click', () => {
         if (popup.style.display === 'block') {
@@ -378,7 +376,7 @@ document.addEventListener('DOMContentLoaded', function () {
         if (contactPopup.classList.contains('show')) {
             closeContactPopup();
         }
-        if (easterEggPopup.classList.contains('show')) {
+        if (easterEggPopup && easterEggPopup.classList.contains('show')) {
             closeEasterEggPopup();
         }
         if (essayPopup.style.display === 'block') {
@@ -386,7 +384,29 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
 
+    function getEasterEggPopup() {
+        if (!easterEggPopup) {
+            easterEggPopup = document.createElement('div');
+            easterEggPopup.className = 'contact-popup easter-egg-popup';
+            
+            const _0x2a1b = str => decodeURIComponent(escape(window.atob(str)));
+            const _0x4f2c = "8J+OiSZuYnNwOyZuYnNwO0NvbmdyYXR1bGF0aW9ucywgeW91IGZvdW5kIHRoZSBFYXN0ZXIgZWdnIQ==";
+            const _0x8d3e = "VmVubW8gcmVxdWVzdCBAZHZzaG8gJDcgd2l0aCB0aGUgbWVzc2FnZSAiYnV5IG1lIGJvYmEi";
+            
+            easterEggPopup.innerHTML = `
+                <div class="dismiss-btn">Nice</div>
+                <p>${_0x2a1b(_0x4f2c)}</p>
+                <p style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif">${_0x2a1b(_0x8d3e)}</p>
+            `;
+            
+            document.body.appendChild(easterEggPopup);
+            easterEggPopup.querySelector('.dismiss-btn').addEventListener('click', closeEasterEggPopup);
+        }
+        return easterEggPopup;
+    }
+
     function showEasterEggPopup() {
+        const popup = getEasterEggPopup();
         confetti({
             particleCount: 150,
             spread: 180,
@@ -397,7 +417,7 @@ document.addEventListener('DOMContentLoaded', function () {
             setTimeout(() => {
                 contactPopup.style.display = 'none';
             }, 300);
-            easterEggPopup.dataset.triggeringPopup = 'contact';
+            popup.dataset.triggeringPopup = 'contact';
         }
 
         if (!document.body.classList.contains('popup-active')) {
@@ -406,14 +426,15 @@ document.addEventListener('DOMContentLoaded', function () {
             document.body.classList.add('popup-active');
         }
         closeMobilePopup();
-        easterEggPopup.style.display = 'block';
+        popup.style.display = 'block';
         overlay.style.display = 'block';
         setTimeout(() => {
-            easterEggPopup.classList.add('show');
+            popup.classList.add('show');
         }, 10);
     }
 
     function closeEasterEggPopup() {
+        if (!easterEggPopup) return;
         easterEggPopup.classList.remove('show');
         setTimeout(() => {
             easterEggPopup.style.display = 'none';
