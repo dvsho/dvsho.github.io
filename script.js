@@ -524,7 +524,7 @@ document.addEventListener('DOMContentLoaded', function () {
         essayPopup.classList.remove('show');
         setTimeout(() => {
             essayPopup.style.display = 'none';
-            if (!contactPopup.classList.contains('show') && !easterEggPopup.classList.contains('show')) {
+            if (!contactPopup.classList.contains('show') && (!easterEggPopup || !easterEggPopup.classList.contains('show'))) {
                 overlay.style.display = 'none';
                 document.body.classList.remove('popup-active');
                 document.body.style.top = '';
@@ -569,7 +569,7 @@ document.addEventListener('DOMContentLoaded', function () {
             setTimeout(() => {
                 amilaneOverlay.style.display = 'none';
                 if (!contactPopup.classList.contains('show') && 
-                    !easterEggPopup.classList.contains('show') && 
+                    (!easterEggPopup || !easterEggPopup.classList.contains('show')) && 
                     !essayPopup.classList.contains('show') &&
                     (!popup || popup.style.display !== 'block')) {
                     document.body.classList.remove('popup-active');
