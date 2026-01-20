@@ -43,7 +43,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 enterBtn.style.display = 'none';
             }, 500);
             if (welcomeText) {
-                welcomeText.textContent = "Loading...";
+                welcomeText.textContent = "Please wait...";
                 setTimeout(() => {
                     welcomeText.style.opacity = '1';
                     const loadingDuration = 1000 + Math.random() * 1500;
@@ -260,6 +260,7 @@ document.addEventListener('DOMContentLoaded', function () {
     let easterEggPopup = null;
 
     logo.addEventListener('click', function() {
+        if (logo.classList.contains('spin')) return;
         const randomRotation = 30 + Math.random() * 300;
         currentRotation += randomRotation;
         logo.style.setProperty('--current-rotation', `${currentRotation - randomRotation}deg`);
@@ -356,7 +357,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 }, 10);
                 return;
             }
-            if (!easterEggPopup || !easterEggPopup.classList.contains('show')) {
+            if ((!easterEggPopup || !easterEggPopup.classList.contains('show')) && (!faqPopup || !faqPopup.classList.contains('show'))) {
                 overlay.style.display = 'none';
                 if (document.body.classList.contains('popup-active') && !essayPopup.classList.contains('show')) {
                     document.body.classList.remove('popup-active');
@@ -381,6 +382,9 @@ document.addEventListener('DOMContentLoaded', function () {
         }
         if (essayPopup.style.display === 'block') {
             closeEssayPopup();
+        }
+        if (faqPopup && faqPopup.classList.contains('show')) {
+            closeFaqPopup();
         }
     });
 
@@ -447,7 +451,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 }, 10);
                 restoring = true;
             }
-            if (!restoring && !contactPopup.classList.contains('show')) {
+            if (!restoring && !contactPopup.classList.contains('show') && (!faqPopup || !faqPopup.classList.contains('show'))) {
                 overlay.style.display = 'none';
                 if (document.body.classList.contains('popup-active') && !essayPopup.classList.contains('show')) {
                     document.body.classList.remove('popup-active');
@@ -498,7 +502,7 @@ document.addEventListener('DOMContentLoaded', function () {
     
     async function loadEssayContent() {
         try {
-            const response = await fetch('essay.txt');
+            const response = await fetch('https://a.dvsho.com/essay.txt');
             const content = await response.text();
             essayText.textContent = content;
         } catch (error) {
@@ -524,7 +528,7 @@ document.addEventListener('DOMContentLoaded', function () {
         essayPopup.classList.remove('show');
         setTimeout(() => {
             essayPopup.style.display = 'none';
-            if (!contactPopup.classList.contains('show') && (!easterEggPopup || !easterEggPopup.classList.contains('show'))) {
+            if (!contactPopup.classList.contains('show') && (!easterEggPopup || !easterEggPopup.classList.contains('show')) && (!faqPopup || !faqPopup.classList.contains('show'))) {
                 overlay.style.display = 'none';
                 document.body.classList.remove('popup-active');
                 document.body.style.top = '';
@@ -541,6 +545,83 @@ document.addEventListener('DOMContentLoaded', function () {
     });
     
     window.showEssayPopup = showEssayPopup;
+
+    const faqPopup = document.querySelector('.faq-popup');
+    const faqCloseBtn = document.querySelector('.faq-close-btn');
+    const faqText = document.querySelector('.faq-text');
+    const faqBtn = document.querySelector('.faq-btn');
+
+    async function loadFaqContent() {
+        try {
+            const response = await fetch('faq.txt');
+            const content = await response.text();
+            
+            const lines = content.split('\n');
+            let formattedContent = '';
+            let isFirstLine = true;
+            
+            for (let i = 0; i < lines.length; i++) {
+                const line = lines[i].trim();
+                if (line === '') {
+                    formattedContent += '\n';
+                    continue;
+                }
+                
+                if (line.endsWith('?')) {
+                    formattedContent += `<span class="faq-question">${line}</span>`;
+                } else {
+                    formattedContent += line + '\n';
+                }
+            }
+            
+            faqText.innerHTML = formattedContent;
+        } catch (error) {
+            console.error('Error loading FAQ content:', error);
+            faqText.textContent = 'Sorry, the FAQ content could not be loaded at this time.';
+        }
+    }
+
+    function showFaqPopup() {
+        loadFaqContent();
+        closeMobilePopup();
+        scrollPosition = window.pageYOffset;
+        document.body.style.top = `-${scrollPosition}px`;
+        document.body.classList.add('popup-active');
+        faqPopup.style.display = 'block';
+        overlay.style.display = 'block';
+        setTimeout(() => {
+            faqPopup.classList.add('show');
+        }, 10);
+    }
+
+    function closeFaqPopup() {
+        faqPopup.classList.remove('show');
+        setTimeout(() => {
+            faqPopup.style.display = 'none';
+            if (!contactPopup.classList.contains('show') && 
+                (!easterEggPopup || !easterEggPopup.classList.contains('show')) &&
+                !essayPopup.classList.contains('show') &&
+                (!popup || popup.style.display !== 'block')) {
+                overlay.style.display = 'none';
+                document.body.classList.remove('popup-active');
+                document.body.style.top = '';
+                window.scrollTo(0, scrollPosition);
+            }
+        }, 300);
+    }
+
+    if (faqBtn) {
+        faqBtn.addEventListener('click', showFaqPopup);
+    }
+    if (faqCloseBtn) {
+        faqCloseBtn.addEventListener('click', closeFaqPopup);
+    }
+    
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && faqPopup.classList.contains('show')) {
+            closeFaqPopup();
+        }
+    });
 
     const amilaneLink = document.querySelector('.amilane-link');
     const amilaneOverlay = document.querySelector('.amilane-overlay');
@@ -571,6 +652,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 if (!contactPopup.classList.contains('show') && 
                     (!easterEggPopup || !easterEggPopup.classList.contains('show')) && 
                     !essayPopup.classList.contains('show') &&
+                    (!faqPopup || !faqPopup.classList.contains('show')) &&
                     (!popup || popup.style.display !== 'block')) {
                     document.body.classList.remove('popup-active');
                     document.body.style.top = '';
