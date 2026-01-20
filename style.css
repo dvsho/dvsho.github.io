@@ -381,7 +381,7 @@ html.no-scroll {
     position: relative;
     width: 100%;
     height: 0;
-    padding-bottom: 100%;
+    padding-bottom: 125%;
     overflow: hidden;
     border-radius: 12px;
     cursor: pointer;
@@ -441,7 +441,7 @@ html.no-scroll {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: min(600px, 80vw);
+    width: min(540px, 48vw);
     z-index: 1000;
     user-select: none;
     -webkit-user-select: none;
@@ -459,7 +459,7 @@ html.no-scroll {
 
 .popup img {
     width: 100%;
-    aspect-ratio: 1;
+    aspect-ratio: 4/5;
     object-fit: cover;
 }
 
@@ -479,6 +479,10 @@ html.no-scroll {
 }
 
 @media (max-width: 600px) {
+    .popup {
+        width: 80vw;
+    }
+    
     .popup .caption-section {
         font-size: 0.9rem;
     }
@@ -990,7 +994,7 @@ footer {
     padding: 25px 10px 20px 0px;
     overflow-y: auto;
     color: #101830;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    font-family: 'H Regular', sans-serif;
     font-size: 1.01rem;
     line-height: 1.6;
     text-align: left;
