@@ -601,6 +601,7 @@ body.popup-active {
     
     .essay-text {
         padding: 25px 0px 20px 0px;
+        font-family: 'H Medium', sans-serif;
         font-size: 0.9rem;
     }
     
@@ -724,6 +725,7 @@ body.popup-active {
     
     .faq-text {
         padding: 25px 0px 20px 0px;
+        font-family: 'H Medium', sans-serif;
     }
     
     .faq-popup .faq-close-btn {
