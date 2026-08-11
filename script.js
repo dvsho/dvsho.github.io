@@ -233,7 +233,7 @@ document.addEventListener('DOMContentLoaded', function () {
     
     async function loadEssayContent() {
         try {
-            const response = await fetch('https://a.dvsho.com/essay.txt');
+            const response = await fetch('https://a.dhcooks.net/essay.txt');
             const content = await response.text();
             essayText.textContent = content;
         } catch (error) {
