@@ -142,31 +142,21 @@ body.popup-active {
     left: 40px;
     z-index: 1000;
     text-align: left;
-    cursor: pointer;
     user-select: none;
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
 }
 
+.logo a {
+    display: inline-block;
+    cursor: pointer;
+}
+
 .logo img {
     width: 80px;
     height: auto;
-}
-
-.logo.spin {
-    animation: spinRotate 1s ease forwards;
-    --random-rotation: 0deg;
-    --current-rotation: 0deg;
-}
-
-@keyframes spinRotate {
-    0% {
-        transform: rotate(var(--current-rotation));
-    }
-    100% {
-        transform: rotate(var(--target-rotation));
-    }
+    display: block;
 }
 
 .contact-popup {
@@ -931,9 +921,4 @@ footer {
     background-color: #B00030;
     color: #F0F0E0;
     font-size: 1.5rem;
-}
-
-@keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
 }
