@@ -21,75 +21,6 @@ window.addEventListener('scroll', () => {
 }, { passive: true });
 
 document.addEventListener('DOMContentLoaded', function () {
-    window.scrollTo(0, 0);
-    if ('scrollRestoration' in history) {
-        history.scrollRestoration = 'manual';
-    }
-    const ua = navigator.userAgent;
-    const isSafari = ua.includes('Safari') && 
-                     !ua.includes('Chrome') && 
-                     !ua.includes('CriOS') && 
-                     !ua.includes('FxiOS') && 
-                     !ua.includes('Instagram');
-    if (isSafari) {
-        document.body.classList.add('is-safari');
-    }
-    const enterBtn = document.querySelector('.enter-btn');
-    const welcomeText = document.querySelector('.welcome-text');
-    if (enterBtn) {
-        enterBtn.addEventListener('click', () => {
-            enterBtn.style.opacity = '0';
-            setTimeout(() => {
-                enterBtn.style.display = 'none';
-            }, 500);
-            if (welcomeText) {
-                welcomeText.textContent = "Please wait...";
-                setTimeout(() => {
-                    welcomeText.style.opacity = '1';
-                    const loadingDuration = 1000 + Math.random() * 1500;
-                    setTimeout(() => {
-                        welcomeText.style.opacity = '0';
-                        setTimeout(() => {
-                            welcomeText.textContent = "Ready";
-                            welcomeText.style.opacity = '1';
-                            setTimeout(() => {
-                                welcomeText.style.opacity = '0';
-                                setTimeout(() => {
-                                    startScroll();
-                                }, 670);
-                            }, 1000);
-                        }, 670);
-                    }, loadingDuration);
-                }, 330);
-            } else {
-                startScroll();
-            }
-        });
-    }
-
-    function startScroll() {
-        document.documentElement.classList.remove('no-scroll');
-        const description = document.querySelector('.description');
-        if (description) {
-            const targetPosition = (description.getBoundingClientRect().bottom + window.scrollY) - window.innerHeight;
-            const startPosition = window.scrollY;
-            const distance = targetPosition - startPosition;
-            const duration = 1800;
-            let startTime = null;
-            function animation(currentTime) {
-                if (startTime === null) startTime = currentTime;
-                const timeElapsed = currentTime - startTime;
-                const progress = Math.min(timeElapsed / duration, 1);
-                const ease = 1 - Math.pow(1 - progress, 3);
-                window.scrollTo(0, startPosition + (distance * ease));
-                if (timeElapsed < duration) {
-                    requestAnimationFrame(animation);
-                }
-            }
-            requestAnimationFrame(animation);
-        }
-    }
-
     let scrollPosition = 0;
     const mobilePopup = document.querySelector('.mobile-popup');
     const dismissBtn = document.querySelector('.mobile-popup .dismiss-btn');
@@ -286,108 +217,9 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
 
-    const navLinks = document.querySelectorAll('.nav-links a');
-    const contactPopup = document.querySelector('.contact-popup:not(.easter-egg-popup)');
-    const contactDismissBtn = contactPopup.querySelector('.dismiss-btn');
-    const emailIcons = contactPopup.querySelectorAll('.email-icon');
-    const socialIcons = contactPopup.querySelectorAll('.social-icon');
-
-    navLinks.forEach(link => {
-        link.addEventListener('click', function(e) {
-            if (!this.classList.contains('contact-link')) return;
-            e.preventDefault();
-            this.classList.add('bob-up');
-            setTimeout(() => {
-                if (easterEggPopup && easterEggPopup.classList.contains('show')) {
-                    easterEggPopup.classList.remove('show');
-                    setTimeout(() => {
-                        easterEggPopup.style.display = 'none';
-                    }, 300);
-                    contactPopup.dataset.triggeringPopup = 'easterEgg';
-                }
-                if (!document.body.classList.contains('popup-active')) {
-                    scrollPosition = window.pageYOffset;
-                    document.body.style.top = `-${scrollPosition}px`;
-                    document.body.classList.add('popup-active');
-                }
-                closeMobilePopup();
-                contactPopup.style.display = 'block';
-                overlay.style.display = 'block';
-                overlay.offsetHeight;
-                overlay.classList.add('show');
-                setTimeout(() => {
-                    contactPopup.classList.add('show');
-                }, 10);
-                setTimeout(() => {
-                    this.classList.remove('bob-up');
-                }, 300);
-            }, 300);
-        });
-    });
-
-    emailIcons.forEach(icon => {
-        icon.addEventListener('click', function() {
-            const emailLink = this.nextElementSibling;
-            this.classList.add('animate-symbol');
-            const isMobile = window.innerWidth <= 600;
-            setTimeout(() => {
-                window.location.href = emailLink.href;
-                setTimeout(() => {
-                    this.classList.remove('animate-symbol');
-                }, isMobile ? 1000 : 300);
-            }, isMobile ? 800 : 450);
-        });
-    });
-
-    socialIcons.forEach(icon => {
-        icon.addEventListener('click', function() {
-            const socialLink = this.nextElementSibling;
-            this.classList.add('animate-symbol');
-            const isMobile = window.innerWidth <= 600;
-            setTimeout(() => {
-                window.open(socialLink.href, '_blank');
-                setTimeout(() => {
-                    this.classList.remove('animate-symbol');
-                }, isMobile ? 1000 : 300);
-            }, isMobile ? 800 : 450);
-        });
-    });
-
-    function closeContactPopup() {
-        contactPopup.classList.remove('show');
-        overlay.classList.remove('show');
-        setTimeout(() => {
-            contactPopup.style.display = 'none';
-            if (contactPopup.dataset.triggeringPopup === 'easterEgg' && easterEggPopup) {
-                delete contactPopup.dataset.triggeringPopup;
-                easterEggPopup.style.display = 'block';
-                overlay.classList.add('show');
-                setTimeout(() => {
-                    easterEggPopup.classList.add('show');
-                }, 10);
-                return;
-            }
-            if ((!easterEggPopup || !easterEggPopup.classList.contains('show')) && (!faqPopup || !faqPopup.classList.contains('show'))) {
-                if (!overlay.classList.contains('show')) {
-                    overlay.style.display = 'none';
-                }
-                if (document.body.classList.contains('popup-active') && !essayPopup.classList.contains('show')) {
-                    document.body.classList.remove('popup-active');
-                    document.body.style.top = '';
-                    window.scrollTo(0, scrollPosition);
-                }
-            }
-        }, 300);
-    }
-
-    contactDismissBtn.addEventListener('click', closeContactPopup);
-
     overlay.addEventListener('click', () => {
         if (popup.style.display === 'block') {
             closePopup();
-        }
-        if (contactPopup.classList.contains('show')) {
-            closeContactPopup();
         }
         if (easterEggPopup && easterEggPopup.classList.contains('show')) {
             closeEasterEggPopup();
@@ -428,13 +260,6 @@ document.addEventListener('DOMContentLoaded', function () {
             spread: 180,
             origin: { y: 0.6 }
         });
-        if (contactPopup.classList.contains('show')) {
-            contactPopup.classList.remove('show');
-            setTimeout(() => {
-                contactPopup.style.display = 'none';
-            }, 300);
-            popup.dataset.triggeringPopup = 'contact';
-        }
 
         if (!document.body.classList.contains('popup-active')) {
             scrollPosition = window.pageYOffset;
@@ -457,17 +282,7 @@ document.addEventListener('DOMContentLoaded', function () {
         overlay.classList.remove('show');
         setTimeout(() => {
             easterEggPopup.style.display = 'none';
-            let restoring = false;
-            if (easterEggPopup.dataset.triggeringPopup === 'contact') {
-                delete easterEggPopup.dataset.triggeringPopup;
-                contactPopup.style.display = 'block';
-                overlay.classList.add('show');
-                setTimeout(() => {
-                    contactPopup.classList.add('show');
-                }, 10);
-                restoring = true;
-            }
-            if (!restoring && !contactPopup.classList.contains('show') && (!faqPopup || !faqPopup.classList.contains('show'))) {
+            if ((!faqPopup || !faqPopup.classList.contains('show'))) {
                 if (!overlay.classList.contains('show')) {
                     overlay.style.display = 'none';
                 }
@@ -549,7 +364,7 @@ document.addEventListener('DOMContentLoaded', function () {
         overlay.classList.remove('show');
         setTimeout(() => {
             essayPopup.style.display = 'none';
-            if (!contactPopup.classList.contains('show') && (!easterEggPopup || !easterEggPopup.classList.contains('show')) && (!faqPopup || !faqPopup.classList.contains('show'))) {
+            if ((!easterEggPopup || !easterEggPopup.classList.contains('show')) && (!faqPopup || !faqPopup.classList.contains('show'))) {
                 if (!overlay.classList.contains('show')) {
                     overlay.style.display = 'none';
                 }
@@ -692,8 +507,7 @@ document.addEventListener('DOMContentLoaded', function () {
             faqBtn.style.transition = '';
             faqBtn.style.color = '';
             
-            if (!contactPopup.classList.contains('show') && 
-                (!easterEggPopup || !easterEggPopup.classList.contains('show')) &&
+            if ((!easterEggPopup || !easterEggPopup.classList.contains('show')) &&
                 !essayPopup.classList.contains('show') &&
                 (!popup || popup.style.display !== 'block')) {
                 if (!overlay.classList.contains('show')) {
@@ -718,49 +532,4 @@ document.addEventListener('DOMContentLoaded', function () {
             closeFaqPopup();
         }
     });
-
-    const amilaneLink = document.querySelector('.amilane-link');
-    const amilaneOverlay = document.querySelector('.amilane-overlay');
-    const amilaneCloseBtn = document.querySelector('.amilane-close-btn');
-
-    if (amilaneLink && amilaneOverlay && amilaneCloseBtn) {
-        amilaneLink.addEventListener('click', function(e) {
-            e.preventDefault();
-            closeMobilePopup();
-            if (contactPopup.classList.contains('show')) {
-                 closeContactPopup();
-            }
-            if (!document.body.classList.contains('popup-active')) {
-                scrollPosition = window.pageYOffset;
-                document.body.style.top = `-${scrollPosition}px`;
-                document.body.classList.add('popup-active');
-            }
-            amilaneOverlay.style.display = 'flex';
-            amilaneOverlay.offsetHeight; 
-            amilaneOverlay.classList.add('show');
-        });
-
-        amilaneCloseBtn.addEventListener('click', closeAmilaneOverlay);
-        function closeAmilaneOverlay() {
-            amilaneOverlay.classList.remove('show');
-            setTimeout(() => {
-                amilaneOverlay.style.display = 'none';
-                if (!contactPopup.classList.contains('show') && 
-                    (!easterEggPopup || !easterEggPopup.classList.contains('show')) && 
-                    !essayPopup.classList.contains('show') &&
-                    (!faqPopup || !faqPopup.classList.contains('show')) &&
-                    (!popup || popup.style.display !== 'block')) {
-                    document.body.classList.remove('popup-active');
-                    document.body.style.top = '';
-                    window.scrollTo(0, scrollPosition);
-                }
-            }, 500);
-        }
-
-        document.addEventListener('keydown', function(e) {
-            if (e.key === 'Escape' && amilaneOverlay.classList.contains('show')) {
-                closeAmilaneOverlay();
-            }
-        });
-    }
 });
