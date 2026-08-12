@@ -130,27 +130,30 @@ body.popup-active {
     }
 }
 
-.logo {
+.dvsho-link {
     position: absolute;
     top: 30px;
-    left: 40px;
+    right: 40px;
     z-index: 1000;
-    text-align: left;
+    text-align: right;
     user-select: none;
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
 }
 
-.logo a {
+.dvsho-link a {
     display: inline-block;
+    color: #F0F0E0;
+    text-decoration: none;
+    font-family: 'H Medium', sans-serif;
+    font-size: 1.1rem;
     cursor: pointer;
+    transition: opacity 0.3s ease;
 }
 
-.logo img {
-    width: 80px;
-    height: auto;
-    display: block;
+.dvsho-link a:hover {
+    opacity: 0.7;
 }
 
 .contact-popup {
