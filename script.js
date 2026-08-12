@@ -294,7 +294,6 @@ document.addEventListener('DOMContentLoaded', function () {
             
             const lines = content.split('\n');
             let formattedContent = '';
-            let isFirstLine = true;
             
             for (let i = 0; i < lines.length; i++) {
                 const line = lines[i].trim();
