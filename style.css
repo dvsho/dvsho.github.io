@@ -9,25 +9,19 @@
 
 @font-face {
     font-family: 'H Regular';
-    src: url('https://a.dhcooks.net/fonts/Hellix-Regular.ttf') format('truetype');
+    src: url('assets/fonts/Hellix-Regular.ttf') format('truetype');
     font-style: normal;
 }
 
 @font-face {
     font-family: 'H Medium';
-    src: url('https://a.dhcooks.net/fonts/Hellix-Medium.ttf') format('truetype');
+    src: url('assets/fonts/Hellix-Medium.ttf') format('truetype');
     font-style: normal;
 }
 
 @font-face {
     font-family: 'H Semibold';
-    src: url('https://a.dhcooks.net/fonts/Hellix-SemiBold.ttf') format('truetype');
-    font-style: normal;
-}
-
-@font-face {
-    font-family: 'Founders';
-    src: url('https://a.dhcooks.net/fonts/FoundersGroteskText-Regular.otf') format('opentype');
+    src: url('assets/fonts/Hellix-SemiBold.ttf') format('truetype');
     font-style: normal;
 }
 
