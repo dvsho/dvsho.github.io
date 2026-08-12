@@ -289,7 +289,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     async function loadFaqContent() {
         try {
-            const response = await fetch('faq.txt');
+            const response = await fetch('assets/faq.txt');
             const content = await response.text();
             
             const lines = content.split('\n');
